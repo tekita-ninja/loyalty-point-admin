@@ -12,7 +12,7 @@ export default function PageContainer({
   subtitle?: string;
 }) {
   return (
-    <div className="container py-3">
+    <div className="container p-4">
       <header className="flex">
         <div>
           <h1>{title}</h1>
