@@ -8,6 +8,7 @@ import menus from '@/data/menu.json'
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import SidemenuItemLoader from './sidemenu-item-loader';
 export default function SidebarMenu() {
   const { resolvedTheme } = useTheme()
   const pathname = usePathname()
@@ -99,7 +100,7 @@ export default function SidebarMenu() {
               width: '100%',
               border: 'none',
               backgroundColor: 'transparent',
-              color: themeStyle.sidebar.color,
+              color: themeStyle?.sidebar?.color,
             }}
             collapsed={!isOpen} collapsedWidth="80px">
             <Menu
@@ -135,7 +136,7 @@ export default function SidebarMenu() {
                           }
                         </SubMenu>
                       ) : (
-                          <MenuItem component={<Link href={item.url_menu_group} />} active={item.url_menu_group === pathname} icon={<Icon className='h-4 w-4' icon={item.icon_menu_group} />}> {item.nama_menu_group}</MenuItem>
+                        <MenuItem component={<Link href={item.url_menu_group} />} active={item.url_menu_group === pathname} icon={<Icon className='h-4 w-4' icon={item.icon_menu_group} />}> {item.nama_menu_group}</MenuItem>
                       )
                     }
                   </Fragment>
@@ -148,13 +149,13 @@ export default function SidebarMenu() {
                     isOpen ? 'block' : 'hidden'
                   )}>General</h2>
                 </div>
-                <MenuItem active={pathname ==='/profile'} component={<Link href={'/profile'} />} icon={<Icon className='h-4 w-4' icon={'mdi:user-circle'} />}> Profile</MenuItem>
-                <MenuItem active={pathname ==='/documentation'} component={<Link href={'/documentation'} />} icon={<Icon className='h-4 w-4' icon={'majesticons:document-award'} />}> Documentation</MenuItem>
+                <MenuItem active={pathname === '/profile'} component={<Link href={'/profile'} />} icon={<Icon className='h-4 w-4' icon={'mdi:user-circle'} />}> Profile</MenuItem>
+                <MenuItem active={pathname === '/documentation'} component={<Link href={'/documentation'} />} icon={<Icon className='h-4 w-4' icon={'majesticons:document-award'} />}> Documentation</MenuItem>
               </div>
             </Menu>
           </Sidebar>
         ) : (
-          <div>LOADING</div>
+          <SidemenuItemLoader />
         )
       }
     </div>
