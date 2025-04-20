@@ -26,7 +26,7 @@ export default function AuthLayout({
               </h3>
             </div>
             <div className="italic text-sm font-bold text-slate-100/80 mt-4 text-center">
-              Say goodbye to complex systems and endless coding. With our app, you don't need to be a developer to run your business efficiently.
+              Say goodbye to complex systems and endless coding. With our app, you don&apos;t need to be a developer to run your business efficiently.
             </div>
           </div>
         </div>

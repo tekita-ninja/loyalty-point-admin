@@ -62,9 +62,9 @@ export default function SidebarMenu() {
       fontWeight: 500,
     },
     icon: {
-      color: themeStyle.menu.icon,
+      color: themeStyle?.menu.icon,
       [`&.${menuClasses.disabled}`]: {
-        color: themeStyle.menu.disabled.color,
+        color: themeStyle?.menu.disabled.color,
       },
     },
     SubMenuExpandIcon: {
@@ -77,11 +77,11 @@ export default function SidebarMenu() {
     button: {
       height: 43,
       [`&.${menuClasses.disabled}`]: {
-        color: themeStyle.menu.disabled.color,
+        color: themeStyle?.menu.disabled.color,
       },
       '&:hover': {
         backgroundColor: 'transparent',
-        color: themeStyle.menu.hover.color,
+        color: themeStyle?.menu.hover.color,
       },
     },
     label: ({ open }) => ({
