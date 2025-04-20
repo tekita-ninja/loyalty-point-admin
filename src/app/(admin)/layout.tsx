@@ -9,12 +9,12 @@ export default function AdminLayout({
   return (
     <>
       <div className="flex items-start bg-primary/5 dark:bg-primary/10">
-      <SideMenu />
-      <div className="flex-1">
-        <Navbar />
-        <main className="bg-primary-foreground/80">{children}</main>
+        <SideMenu />
+        <div className="flex-1">
+          <Navbar />
+          <main className="bg-primary-foreground/80sasa container">{children}</main>
+        </div>
       </div>
-    </div>
     </>
   );
 }
