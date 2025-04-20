@@ -1,0 +1,95 @@
+{
+  "status": "OK",
+  "message": "Menu sidebar berhasil diambil.",
+  "data": [
+    {
+      "is_active":true,
+      "nama_menu_group": "Dashboard",
+      "url_menu_group": "/",
+      "icon_menu_group": "pajamas:dashboard",
+      "permission_name": "dashboard",
+      "menu_items": []
+    },
+    {
+      "nama_menu_group": "Akuntansi",
+      "url_menu_group": "/akuntansi",
+      "icon_menu_group": "fa6-solid:money-check-dollar",
+      "permission_name": "akuntansi",
+      "menu_items": [
+        {
+          "nama_menu_item": "Kelompok COA",
+          "url_menu_item": "/akuntansi/kelompok-coa",
+          "permission_name": "kelompok-coa.index"
+        },
+        {
+          "nama_menu_item": "COA",
+          "url_menu_item": "/akuntansi/coa",
+          "permission_name": "coa.index"
+        },
+        {
+          "nama_menu_item": "Sandi Transaksi",
+          "url_menu_item": "/akuntansi/sandi-transaksi",
+          "permission_name": "sandi.transaksi.index"
+        },
+        {
+          "nama_menu_item": "Jurnal",
+          "url_menu_item": "/akuntansi/jurnal",
+          "permission_name": "jurnal.index"
+        },
+        {
+          "nama_menu_item": "Buku Besar",
+          "url_menu_item": "/akuntansi/buku-besar",
+          "permission_name": "buku.besar.index"
+        },
+        {
+          "nama_menu_item": "Neraca Saldo",
+          "url_menu_item": "/akuntansi/neraca-saldo",
+          "permission_name": "neraca.saldo.index"
+        },
+        {
+          "nama_menu_item": "Laporan Neraca",
+          "url_menu_item": "/akuntansi/laporan-neraca",
+          "permission_name": "laporan.neraca.index"
+        },
+        {
+          "nama_menu_item": "Laporan Laba Rugi",
+          "url_menu_item": "/akuntansi/laporan-laba-rugi",
+          "permission_name": "laporan.labarugi.index"
+        }
+      ]
+    },
+    {
+      "nama_menu_group": "Setting",
+      "url_menu_group": "/setting",
+      "icon_menu_group": "ic:sharp-settings",
+      "permission_name": "setting",
+      "menu_items": [
+        {
+          "nama_menu_item": "User",
+          "url_menu_item": "/setting/user",
+          "permission_name": "user.index"
+        },
+        {
+          "nama_menu_item": "Role",
+          "url_menu_item": "/setting/role",
+          "permission_name": "role.index"
+        },
+        {
+          "nama_menu_item": "Unit",
+          "url_menu_item": "/setting/unit",
+          "permission_name": "unit.index"
+        },
+        {
+          "nama_menu_item": "Grup Unit",
+          "url_menu_item": "/setting/grup-unit",
+          "permission_name": "grup-unit.index"
+        },
+        {
+          "nama_menu_item": "Log Aktivitas",
+          "url_menu_item": "/setting/log-aktivitas",
+          "permission_name": "log-aktivitas.index"
+        }
+      ]
+    }
+  ]
+}
