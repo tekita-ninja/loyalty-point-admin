@@ -1,9 +1,9 @@
 'use client'
 import DataTable from '@/components/datatable'
+import { Card } from '@/components/ui/card'
 import { useWallet } from '@/hooks/wallet/useWallet'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { columns } from './columns'
-import { Card } from '@/components/ui/card'
 export type TWallet = {
   id: number
   wallet: string

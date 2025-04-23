@@ -18,7 +18,7 @@ import {
 } from '@tanstack/react-table'
 interface DataTableProps<TData> {
   data: TData[]
-  columns: ColumnDef<TData, any>[]
+  columns: ColumnDef<TData>[]
   pageCount: number
   pageIndex: number
   pageSize: number
