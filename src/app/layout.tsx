@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
-import { Open_Sans, Exo_2 } from "next/font/google";
-import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import ContextProvider from "@/context";
+import type { Metadata } from "next";
+import { Exo_2, Open_Sans } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
-
+import "./globals.css";
+import { Toaster } from "@/components/ui/sonner"
 const openSans = Open_Sans({
   subsets: ['latin'],
   variable: '--font-open-sans',
-  weight: ['300','400','500','600','700','800'],
+  weight: ['300', '400', '500', '600', '700', '800'],
 });
 const exo2 = Exo_2({
   subsets: ['latin'],
@@ -38,7 +39,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NextTopLoader initialPosition={0.2} color="#0B99FF" />
-          {children}
+          <ContextProvider>
+            {children}
+          </ContextProvider>
+          <Toaster richColors />
         </ThemeProvider>
       </body>
     </html>

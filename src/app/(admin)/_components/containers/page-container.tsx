@@ -1,30 +1,43 @@
 'use client'
 
+import { Card } from "@/components/ui/card";
+import React from "react";
+
 export default function PageContainer({
   children,
   actions,
   title,
   subtitle,
+  withCard
 }: {
   children: React.ReactNode;
   actions?: React.ReactNode;
   title?: string;
   subtitle?: string;
+  withCard?: boolean;
 }) {
   return (
-    <div className="container p-4">
-      <header className="flex">
+    <PageWrapper withCard={withCard}>
+      <header className="flex flex-col gap-3 md:flex-row justify-between bg-slate-100/20 dark:bg-primary/5 p-2">
         <div>
-          <h1>{title}</h1>
-          <p>{subtitle}</p>
+          <h1 className="text-xl font-semibold text-slate-700 dark:text-slate-300">{title}</h1>
+          <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">{subtitle}</p>
         </div>
         <div>
           {actions}
         </div>
       </header>
-      <div>
+      <div className="p-2">
         {children}
       </div>
-    </div>
+    </PageWrapper>
+  )
+}
+
+const PageWrapper = ({ withCard, children }: { withCard?: boolean, children: React.ReactNode }) => {
+  return (
+    <>
+      {withCard ? <Card className="overflow-hidden mb-4">{children}</Card> : <div className="mb-4">{children}</div>}
+    </>
   )
 }
