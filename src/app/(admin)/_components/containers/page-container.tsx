@@ -18,7 +18,7 @@ export default function PageContainer({
 }) {
   return (
     <PageWrapper withCard={withCard}>
-      <header className="flex flex-col gap-3 md:flex-row justify-between bg-slate-100/20 dark:bg-primary/5 p-2">
+      <header className="flex flex-col gap-3 md:flex-row justify-between p-3">
         <div>
           <h1 className="text-xl font-semibold text-slate-700 dark:text-slate-300">{title}</h1>
           <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">{subtitle}</p>

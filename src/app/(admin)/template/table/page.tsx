@@ -1,8 +1,8 @@
-import { Suspense } from 'react'
-import PageContainer from '../../_components/containers/page-container'
-import FormTemplate from './form'
-import Table from './table'
-
+import SuspenceLoader from '@/components/suspence-loader';
+import { Suspense } from 'react';
+import PageContainer from '../../_components/containers/page-container';
+import FormTemplate from './form';
+import Table from './table';
 export default function TemplateTablePage() {
   return (
     <PageContainer title='Wallets' subtitle='List Of Wallet' actions={
@@ -10,8 +10,7 @@ export default function TemplateTablePage() {
         <FormTemplate />
       </div>
     }>
-
-      <Suspense fallback={<div>Loading table...</div>}>
+      <Suspense fallback={<SuspenceLoader />}>
         <Table />
       </Suspense>
     </PageContainer>

@@ -12,7 +12,7 @@ export default function AdminLayout({
         <SideMenu />
         <div className="flex-1 w-full overflow-x-hidden">
           <Navbar />
-          <main className="bg-primary-foreground/80sasa container mt-5">{children}</main>
+          <main className="bg-primary-foreground/80sasa container">{children}</main>
         </div>
       </div>
     </>
