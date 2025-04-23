@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import PageContainer from '../../_components/containers/page-container'
 import FormTemplate from './form'
 import Table from './table'
@@ -9,7 +10,10 @@ export default function TemplateTablePage() {
         <FormTemplate />
       </div>
     }>
-      <Table />
+
+      <Suspense fallback={<div>Loading table...</div>}>
+        <Table />
+      </Suspense>
     </PageContainer>
   )
 }
