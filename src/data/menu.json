@@ -90,6 +90,19 @@
           "permission_name": "log-aktivitas.index"
         }
       ]
-    }
+    },
+        {
+          "nama_menu_group": "Template",
+          "url_menu_group": "/template",
+          "icon_menu_group": "tabler:template",
+          "permission_name": "template",
+          "menu_items": [
+            {
+              "nama_menu_item": "Table",
+              "url_menu_item": "/template/table",
+              "permission_name": "user.index"
+            }
+          ]
+        }
   ]
 }

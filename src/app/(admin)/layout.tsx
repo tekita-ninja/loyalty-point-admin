@@ -10,9 +10,9 @@ export default function AdminLayout({
     <>
       <div className="flex items-start bg-primary/5 dark:bg-primary/10">
         <SideMenu />
-        <div className="flex-1">
+        <div className="flex-1 w-full overflow-x-hidden">
           <Navbar />
-          <main className="bg-primary-foreground/80sasa container">{children}</main>
+          <main className="bg-primary-foreground/80sasa container mt-5">{children}</main>
         </div>
       </div>
     </>
