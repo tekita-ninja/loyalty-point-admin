@@ -41,15 +41,17 @@ export function SearchForm({
   }
 
   const handleReset = () => {
-    const page = '1'
-    const pageSize = '10'
+    if (typeof window !== 'undefined') {
+      const page = '1'
+      const pageSize = '10'
 
-    const newParams = new URLSearchParams()
-    newParams.set('page', page)
-    newParams.set('pageSize', pageSize)
-    window.history.replaceState(null, '', `?${newParams.toString()}`)
-    if (onReset) onReset()
-    form.reset({ search: '' })
+      const newParams = new URLSearchParams()
+      newParams.set('page', page)
+      newParams.set('pageSize', pageSize)
+      window.history.replaceState(null, '', `?${newParams.toString()}`)
+      if (onReset) onReset()
+      form.reset({ search: '' })
+    }
   }
 
   return (
