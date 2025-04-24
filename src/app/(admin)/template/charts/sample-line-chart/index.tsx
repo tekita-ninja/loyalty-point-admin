@@ -16,8 +16,11 @@ export const options = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
+    tooltip: {
+      intersect: false
+    },
     legend: {
-      display:false,
+      display: false,
       position: 'top' as const,
     },
     title: {
@@ -61,11 +64,11 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-export default function ChartRevenue() {
+export default function SampleLineChart() {
   return (
     <Card>
       <CardHeader>
-        <h2 className='font-semibold uppercase text-slate-600 dark:text-slate-100'>Revenue</h2>
+        <h2 className='font-semibold uppercase text-slate-600 dark:text-slate-100'>Line Chart</h2>
       </CardHeader>
       <CardContent>
         <Line height={'320px'} options={options} data={data} />

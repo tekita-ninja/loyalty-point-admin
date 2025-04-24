@@ -4,6 +4,7 @@ import { faker } from '@faker-js/faker';
 import {
   CategoryScale,
   Chart as ChartJS,
+  Filler,
   Legend,
   LinearScale,
   LineElement,
@@ -16,8 +17,11 @@ export const options = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
+    tooltip: {
+      intersect: false
+    },
     legend: {
-      display:false,
+      display: false,
       position: 'top' as const,
     },
     title: {
@@ -43,11 +47,14 @@ export const data = {
   labels,
   datasets: [
     {
+      fill:true,
       label: 'Dataset 1',
       data: labels.map(() => faker.finance.amount({ min: 10000, max: 1000000 })),
       borderColor: '#0B99FF',
-      backgroundColor: '#0B99FF',
-      tension: 0.4
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      tension: 0.4,
+      pointRadius: 0, // Hilangkan dot
+      pointHoverRadius: 5,
     }
   ],
 };
@@ -59,13 +66,14 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler,
 );
-export default function ChartRevenue() {
+export default function SampleAreaChart() {
   return (
     <Card>
       <CardHeader>
-        <h2 className='font-semibold uppercase text-slate-600 dark:text-slate-100'>Revenue</h2>
+        <h2 className='font-semibold uppercase text-slate-600 dark:text-slate-100'>Area Chart</h2>
       </CardHeader>
       <CardContent>
         <Line height={'320px'} options={options} data={data} />

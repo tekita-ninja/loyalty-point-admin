@@ -101,6 +101,11 @@
               "nama_menu_item": "Table",
               "url_menu_item": "/template/table",
               "permission_name": "user.index"
+            },
+            {
+              "nama_menu_item": "Charts",
+              "url_menu_item": "/template/charts",
+              "permission_name": "user.index"
             }
           ]
         }
