@@ -1,11 +1,11 @@
 'use client'
+import { cn } from '@/lib/utils'
 import useSideMenu from '@/store/useSideMenu'
+import { useRef } from 'react'
+import { useOnClickOutside } from 'usehooks-ts'
 import SidebarFooter from './sidebar-footer'
 import SidebarHeader from './sidebar-header'
 import SidebarMenu from './sidebar-menu'
-import { cn } from '@/lib/utils'
-import { useOnClickOutside } from 'usehooks-ts'
-import { useRef } from 'react'
 export default function SideMenu() {
   const ref = useRef(null)
   const { isOpen, isHidden, setIsHidden } = useSideMenu()

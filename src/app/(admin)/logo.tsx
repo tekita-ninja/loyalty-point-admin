@@ -29,7 +29,7 @@ export default function Logo(props: LogoProp) {
       }
 
       {
-        isOpen && !props.noText && <p className='font-bold text-xl hidden md:flex'>{props.text || 'GENEURASYS'}</p>
+        isOpen && !props.noText && <p className='font-bold text-xl hidden md:flex'>{props.text || 'LOGO'}</p>
       }
     </Link>
   )

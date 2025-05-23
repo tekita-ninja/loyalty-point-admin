@@ -7,7 +7,7 @@ export default function Breadcrumb() {
   const pathname = usePathname()
   const paths = pathname.split('/').filter(i => i !== "")
   return (
-    <div className='bg-white dark:bg-primary-foreground'>
+    <div className='bg-white dark:bg-primary-foreground hidden md:block'>
       <div className="container">
         <div className='flex text-sm items-center gap-x-2 h-[30px]'>
           {

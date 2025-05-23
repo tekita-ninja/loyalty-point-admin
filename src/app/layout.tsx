@@ -17,8 +17,8 @@ const exo2 = Exo_2({
 });
 
 export const metadata: Metadata = {
-  title: "Geneurasys",
-  description: "Geneurasys Project",
+  title: "App Name",
+  description: "App Name Project",
 };
 
 export default function RootLayout({

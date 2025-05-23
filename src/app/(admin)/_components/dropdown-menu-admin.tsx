@@ -9,10 +9,14 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useAuth } from "@/hooks/auth/userAuth"
 import { LogOut, User } from "lucide-react"
-import Link from "next/link"
 
 export default function DropdownMenuAdmin() {
+  const {logout} = useAuth()
+  async function handleLogout() {
+    await logout()
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -30,12 +34,12 @@ export default function DropdownMenuAdmin() {
         <DropdownMenuItem>Documentation</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href={'/login'}>
+          <button className="w-full cursor-pointer" onClick={handleLogout}>
             Logout
             <DropdownMenuShortcut>
               <LogOut className="w-4 h-4" />
             </DropdownMenuShortcut>
-          </Link>
+          </button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

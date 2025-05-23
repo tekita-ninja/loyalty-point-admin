@@ -15,7 +15,7 @@ export default function AuthLayout({
         <div className="absolute px-2 left-0 right-0 top-0 bottom-0 bg-gradient-to-tr from-primary to-primary/5 z-10 flex flex-col items-center justify-center">
           <div className="p-12 bg-white/10 backdrop-blur-lg rounded-3xl max-w-lg w-full mx-auto">
             <div className="flex flex-col items-center gap-2">
-              <div className="absolute top-2 left-2">
+              <div className="absolutex top-2 left-2">
                 <Logo logoSize="w-16 h-16" noText />
               </div>
               <h2 className="text-xl lg:text-2xl text-center font-semibold text-white">

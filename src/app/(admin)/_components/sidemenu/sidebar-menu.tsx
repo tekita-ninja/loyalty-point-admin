@@ -4,16 +4,18 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Sidebar, Menu, MenuItem, SubMenu, menuClasses, MenuItemStyles } from 'react-pro-sidebar';
 import { Icon } from "@iconify/react";
 import { cn } from '@/lib/utils';
-import menus from '@/data/menu.json'
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import SidemenuItemLoader from './sidemenu-item-loader';
+import { useSidemenu } from '@/hooks/sidemenu/useSidemenu';
 export default function SidebarMenu() {
+  const menus = useSidemenu()
   const { resolvedTheme } = useTheme()
   const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
   const { isOpen } = useSideMenu()
+  const mainPath = pathname.split("/")[1];
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -115,43 +117,47 @@ export default function SidebarMenu() {
               )}
               closeOnClick
             >
-              <div className='px-6 py-2'>
-                <h2 className={cn(
-                  'text-xs uppercase font-semibold text-slate-500',
-                  isOpen ? 'block' : 'hidden'
-                )}>Admin</h2>
-              </div>
               {
-                menus.data.map((item, index) => (
-                  <Fragment key={index}>
+                menus.map(menu => (
+                  <Fragment key={menu.id}>
+                    <div className='px-6 py-2'>
+                      <h2 className={cn(
+                        'text-xs uppercase font-semibold text-slate-500',
+                        isOpen ? 'block' : 'hidden'
+                      )}>{menu.title}</h2>
+                    </div>
                     {
-                      item.menu_items.length > 0 ? (
-                        <SubMenu defaultOpen={pathname.includes(item.url_menu_group)} active={pathname.includes(item.url_menu_group)} icon={<Icon className='h-4 w-4' icon={item.icon_menu_group} />} label={item.nama_menu_group}>
+                      menu.children.length > 0 ? (
+                        <Fragment>
                           {
-                            item.menu_items.map((menuItem, indexItem) => (
-                              <MenuItem active={menuItem.url_menu_item === pathname} component={<Link href={menuItem.url_menu_item} />} key={indexItem}>
-                                {menuItem.nama_menu_item}
-                              </MenuItem>
+                            menu.children.map(menuItem => (
+                              <Fragment key={menuItem.id}>
+                                {
+                                  menuItem.children.length > 0 ? (
+                                    <SubMenu defaultOpen={menuItem.path == `${mainPath}` } icon={<Icon className='h-4 w-4' icon={menuItem.icon || ''} />} label={menuItem.title}>
+                                      {
+                                        menuItem.children.map((subMenuItem, indexItem) => (
+                                          <MenuItem active={subMenuItem.path === pathname} component={<Link href={subMenuItem.path || '#'} />} key={indexItem}>
+                                            {subMenuItem.title}
+                                          </MenuItem>
+                                        ))
+                                      }
+                                    </SubMenu>
+                                  ) : (
+                                      <MenuItem component={<Link href={menuItem.path || '/'} />} active={menuItem.path === pathname} icon={<Icon className='h-4 w-4' icon={menuItem.icon || ''} />}> {menuItem.title}</MenuItem>
+                                  )
+                                }
+                              </Fragment>
                             ))
                           }
-                        </SubMenu>
+                        </Fragment>
                       ) : (
-                        <MenuItem component={<Link href={item.url_menu_group} />} active={item.url_menu_group === pathname} icon={<Icon className='h-4 w-4' icon={item.icon_menu_group} />}> {item.nama_menu_group}</MenuItem>
+                        <MenuItem component={<Link href={menu.path || '/'} />} active={menu.path === pathname} icon={<Icon className='h-4 w-4' icon={menu.icon || ''} />}> {menu.title}</MenuItem>
                       )
                     }
                   </Fragment>
                 ))
               }
-              <div className='mt-4'>
-                <div className='px-6 py-2'>
-                  <h2 className={cn(
-                    'text-xs uppercase font-semibold text-slate-500',
-                    isOpen ? 'block' : 'hidden'
-                  )}>General</h2>
-                </div>
-                <MenuItem active={pathname === '/profile'} component={<Link href={'/profile'} />} icon={<Icon className='h-4 w-4' icon={'mdi:user-circle'} />}> Profile</MenuItem>
-                <MenuItem active={pathname === '/documentation'} component={<Link href={'/documentation'} />} icon={<Icon className='h-4 w-4' icon={'majesticons:document-award'} />}> Documentation</MenuItem>
-              </div>
             </Menu>
           </Sidebar>
         ) : (

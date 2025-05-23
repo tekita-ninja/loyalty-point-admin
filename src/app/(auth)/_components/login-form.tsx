@@ -1,20 +1,18 @@
 'use client'
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/auth/userAuth";
 import { Icon } from '@iconify/react';
 import { Eye, Lock, User } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 export default function LoginForm() {
-  const router = useRouter()
+  const { loading, error, login } = useAuth()
   const [showPassword, setShowPassword] = useState<boolean>(false)
-  const [loading, setLoading] = useState(false)
-  // simulasi logn
-  function handleLogin() {
-    setLoading(true)
-    setTimeout(() => {
-      router.push('/')
-    }, 1500);
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  async function handleLogin() {
+    await login(username, password)
   }
   return (
     <div className="flex-1 py-4 max-w-sm mx-auto w-full flex flex-col justify-center px-3 md:px-0">
@@ -29,7 +27,7 @@ export default function LoginForm() {
             <div>
               <User className="w-4 h-4" />
             </div>
-            <input id="username" className="focus:outline-none bg-transparent border-none w-full h-10 px-2" autoComplete="new-password" type="text" placeholder="email/username" />
+            <input value={username} onChange={(e) => setUsername(e.target.value)} id="username" className="focus:outline-none bg-transparent border-none w-full h-10 px-2" autoComplete="new-password" type="text" placeholder="email/username" />
           </div>
         </div>
         <div>
@@ -38,7 +36,7 @@ export default function LoginForm() {
             <div>
               <Lock className="w-4 h-4" />
             </div>
-            <input id="password" className="focus:outline-none bg-transparent border-none w-full h-10 px-2" autoComplete="new-password" type={showPassword ? 'text' : 'password'} placeholder="password" />
+            <input value={password} onChange={(e) => setPassword(e.target.value)} id="password" className="focus:outline-none bg-transparent border-none w-full h-10 px-2" autoComplete="new-password" type={showPassword ? 'text' : 'password'} placeholder="password" />
             <button onClick={() => setShowPassword(!showPassword)} type="button">
               <Eye className="w-4 h-4" />
             </button>
@@ -51,6 +49,11 @@ export default function LoginForm() {
             Login
           </Button>
         </div>
+        {
+          error && (
+            <div className="text-center text-xs font-semibold text-destructive bg-red-400/5 p-2 rounded-lg border border-dashed border-red-400 capitalize">{error}</div>
+          )
+        }
       </div>
     </div>
   )

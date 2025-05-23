@@ -1,11 +1,13 @@
 'use client'
 
+import { useProfile } from "@/hooks/profile/useProfile"
 import { cn } from "@/lib/utils"
 import useSideMenu from "@/store/useSideMenu"
 import Image from "next/image"
 
 export default function SidebarFooter() {
   const { isOpen } = useSideMenu()
+  const { data } = useProfile()
   return (
     <div className="shrink-0 px-6 py-2">
       <div className={cn(
@@ -18,8 +20,14 @@ export default function SidebarFooter() {
             <Image width={512} height={512} className="w-full h-full" alt="user" src={'/user-dummy.png'} />
           </div>
           <div>
-            <h2 className="font-semibold">Jhon Paul Ivan</h2>
-            <h2 className="text-xs font-semibold">Super Admin</h2>
+            <h2 className="font-semibold">{data?.fullname}</h2>
+            <h2 className="text-xs font-semibold flex gap-2">
+              {
+                data?.roles.map(i => (
+                  <span key={i} className="text-[10px] bg-black/10 uppercase rounded px-2">{i}</span>
+                ))
+              }
+            </h2>
           </div>
         </div>
       </div>
