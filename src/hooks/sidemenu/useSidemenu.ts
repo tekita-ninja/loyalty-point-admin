@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-type TMenu  = {
+export type TMenu  = {
   id: string
   title: string
   path?: string | null,
