@@ -74,7 +74,7 @@ export default function SetPermissionContent({ roleId }: { roleId: string }) {
 
   return (
     <div className="pb-12">
-      <div className="font-bold mb-2">Role: {detailRole?.data?.name}</div>
+      <div className="font-bold mb-2">Role: {detailRole?.name}</div>
       <div className="grid sm:grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
         {
           roleGroups && Object.entries(roleGroups).map(([group, items]) => (

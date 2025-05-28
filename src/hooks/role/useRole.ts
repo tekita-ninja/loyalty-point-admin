@@ -34,6 +34,7 @@ const getDetail = async (id: string | undefined): Promise<TResponseRole> => {
     method: 'GET',
     url: `roles/${id}`
   })
+  
   return response.data.data;
 }
 const createData = async (payload: TFormRole) => {
