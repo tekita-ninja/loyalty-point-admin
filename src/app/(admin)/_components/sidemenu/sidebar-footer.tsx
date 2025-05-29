@@ -11,8 +11,9 @@ export default function SidebarFooter() {
   return (
     <div className="shrink-0 px-6 py-2">
       <div className={cn(
-        "bg-gradient-to-tr dark:from-primary/10 dark:to-primary/20 from-primary/90 to-primary/70 p-4 rounded-lg",
-        "flex-1 text-white",
+        // dark:from-primary/10 dark:to-primary/20 from-primary/90 to-primary/70
+        "bg-gradient-to-tr  py-2 rounded-lg",
+        "flex-1",
         isOpen ? 'block' : 'hidden'
       )}>
         <div className="flex gap-2">
@@ -31,9 +32,9 @@ export default function SidebarFooter() {
           </div>
         </div>
       </div>
-      {/* <div className="text-center text-[11px] mt-2">
+      <div className="text-start py-1 px-2 font-bold text-[11px] mt-1">
         Version: 1.0.0
-      </div> */}
+      </div>
     </div>
   )
 }
