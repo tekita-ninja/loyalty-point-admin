@@ -3,8 +3,12 @@
 import { z } from "zod"
 
 export const formUserSchema = z.object({
-  fullname: z.string(),
-  email: z.string()
+  firstname: z.string(),
+  lastname: z.string(),
+  email: z.string(),
+  phone: z.string(),
+  gender: z.string(),
+  birthDate: z.string()
 })
 
 export const formUserRoleSchema = z.object({
@@ -24,8 +28,12 @@ type TRole = {
 }
 export type TResponseUser = {
   id: string
-  fullname: string
-  email: string
+  firstname: string
+  lastname: string
+  email: string,
+  phone: string,
+  gender: string,
+  birthDate: string,
   status: boolean
   roles: TRole[] | []
 }

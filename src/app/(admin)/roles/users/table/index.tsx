@@ -19,10 +19,10 @@ export default function Table() {
   return (
     <Card className='p-4'>
       <DataTable
-        data={lists.data?.data?.data ?? []}
+        data={lists.data?.data ?? []}
         columns={columns}
-        pageCount={lists.data?.data?.meta?.lastPage}
-        pageIndex={lists.data?.data?.meta?.currentPage - 1 }
+        pageCount={lists.data?.meta?.lastPage}
+        pageIndex={lists.data?.meta?.currentPage - 1 }
         pageSize={pageSize}
         onPageChange={onPageChange}
         isLoading={lists.isLoading}

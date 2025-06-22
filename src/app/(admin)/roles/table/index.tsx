@@ -12,6 +12,7 @@ export default function Table() {
   const { lists } = useRole()
 
 
+
   async function onPageChange(e: number) {
     const params = new URLSearchParams(searchParams.toString())
     params.set('page', String(e + 1))
@@ -20,10 +21,10 @@ export default function Table() {
   return (
     <Card className='p-4'>
       <DataTable
-        data={lists.data?.data?.data ?? []}
+        data={lists.data?.data ?? []}
         columns={columns}
-        pageCount={lists.data?.data?.meta?.lastPage}
-        pageIndex={lists.data?.data?.meta?.currentPage - 1 }
+        pageCount={lists.data?.data.lastPage}
+        pageIndex={lists.data?.data.currentPage - 1 }
         pageSize={pageSize}
         onPageChange={onPageChange}
         isLoading={lists.isLoading}

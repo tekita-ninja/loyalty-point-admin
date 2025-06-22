@@ -21,6 +21,13 @@ import { Input } from "@/components/ui/input"
 import { useUser } from "@/hooks/user/useUser"
 import { formUserSchema, TFormUser, TResponseUser } from "@/schema/user"
 import { zodResolver } from "@hookform/resolvers/zod"
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { RiAddLine, RiPencilLine } from "react-icons/ri"
@@ -31,8 +38,12 @@ export function FormAction(props?: { data?: TResponseUser }) {
   const form = useForm<TFormUser>({
     resolver: zodResolver(formUserSchema),
     defaultValues: {
-      fullname: '',
+      firstname: '',
+      lastname: '',
       email: '',
+      phone: '',
+      gender: '',
+      birthDate: ''
     }
   })
 
@@ -51,11 +62,20 @@ export function FormAction(props?: { data?: TResponseUser }) {
     setDialog(!dialog)
     if (state && props?.data) {
       form.reset({
-        fullname: props.data.fullname ?? '',
+        firstname: props.data.firstname ?? '',
+        lastname: props.data.lastname ?? '',
         email: props.data.email ?? '',
+        gender: props.data.gender ?? '',
+        phone: props.data.phone ?? '',
+        birthDate: props.data.birthDate ?? '',
       })
     }
   }
+
+  const options = [
+    { value: "MALE", label: "Male" },
+    { value: "FEMALE", label: "Female" },
+  ];
 
   return (
     <Dialog open={dialog} onOpenChange={onOpenChange}>
@@ -83,12 +103,25 @@ export function FormAction(props?: { data?: TResponseUser }) {
 
               <FormField
                 control={form.control}
-                name="fullname"
+                name="firstname"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>First Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="fullname" {...field} />
+                      <Input placeholder="firstname" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="lastname"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="lastname" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -102,6 +135,60 @@ export function FormAction(props?: { data?: TResponseUser }) {
                     <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input placeholder="email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="gender"
+                render={({ field }) => (
+                 <FormItem>
+                    <FormLabel>Gender</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a Gender" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {
+                          options && options.length > 0 && options.map((item: any) => (
+                            <SelectItem key={item.value} value={item.value} className="cursor-pointer hover:bg-slate-100">
+                              <div className="flex items-center gap-2">
+                                {item.label}
+                              </div>
+                            </SelectItem>
+                          ))
+                        }
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone</FormLabel>
+                    <FormControl>
+                      <Input placeholder="phone (62)" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="birthDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Birth Date</FormLabel>
+                    <FormControl>
+                      <Input placeholder="birth date" {...field} type="date" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

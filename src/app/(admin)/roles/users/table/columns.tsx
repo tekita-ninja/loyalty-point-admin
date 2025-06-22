@@ -7,8 +7,12 @@ import PermissionContainer from "@/components/permission-container";
 
 export const columns: ColumnDef<TResponseUser>[] = [
   {
-    accessorKey: 'fullname',
-    header: 'Fullname',
+    accessorKey: 'firstname',
+    header: 'Firstname',
+  },
+  {
+    accessorKey: 'lastname',
+    header: 'Lastname',
   },
   {
     accessorKey: 'email',

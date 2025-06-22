@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { toast } from 'sonner';
 
-const baseURL = `${process.env.baseUrl}/v1`;
+const baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}/v1/api`;
 
 const axiosInstance = axios.create({
   baseURL,
