@@ -1,8 +1,8 @@
 
 import PermissionContainer from '@/components/permission-container'
-import PageContainer from '../../_components/containers/page-container'
 import { FormPromotions } from './form'
 import TablePromotions from './table'
+import PageContainer from '@/app/(admin)/_components/containers/page-container'
 
 export default function page() {
   return (

@@ -44,7 +44,7 @@ export function FormPromotions(props?: { data?: TResponsePromotions }) {
         urlPicture: '',
         startDate: '',
         endDate: '',
-        isPush: '1',
+        isPush: '',
     }
   })
 
@@ -77,7 +77,7 @@ export function FormPromotions(props?: { data?: TResponsePromotions }) {
         urlPicture: props.data.urlPicture ?? '',
         startDate: props.data.startDate ? dayjs(props.data.startDate).format('YYYY-MM-DD') : '',
         endDate: props.data.endDate ? dayjs(props.data.endDate).format('YYYY-MM-DD') : '',
-        isPush: props.data.isPush ? String(props.data.isPush) : '1',
+        isPush: typeof props.data.isPush === 'number'  ? String(props.data.isPush) : '1',
       })
     }
   }
@@ -96,7 +96,7 @@ async function handleUploadFile(event: React.ChangeEvent<HTMLInputElement>) {
   );
 }
 
-  const options = [
+const options = [
     { value: '1', label: "Ya" },
     { value: '0', label: "Tidak" },
   ];

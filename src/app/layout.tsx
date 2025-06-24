@@ -17,8 +17,8 @@ const exo2 = Exo_2({
 });
 
 export const metadata: Metadata = {
-  title: "App Name",
-  description: "App Name Project",
+  title: "Loyalty Point Elite Eight",
+  description: "App Loyalty Point Elite Eigh",
 };
 
 export default function RootLayout({

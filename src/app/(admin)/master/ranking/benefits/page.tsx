@@ -1,8 +1,8 @@
 
 import PermissionContainer from '@/components/permission-container'
-import PageContainer from '../../_components/containers/page-container'
 import TableBenefit from './table'
 import { FormBenefit } from './form'
+import PageContainer from '@/app/(admin)/_components/containers/page-container'
 
 export default function page() {
   return (

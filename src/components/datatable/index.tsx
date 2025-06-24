@@ -24,6 +24,7 @@ interface DataTableProps<TData> {
   pageSize: number
   onPageChange: (pageIndex: number) => void
   isLoading?: boolean;
+  showSearch?: boolean;
   children?: ReactNode
 }
 
@@ -55,6 +56,7 @@ export default function DataTable<TData>({
   pageSize,
   onPageChange,
   isLoading,
+  showSearch = true,
   children
 }: DataTableProps<TData>) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -118,7 +120,8 @@ export default function DataTable<TData>({
     <>
       {isLoading ? <TableLoader /> : (
         <div>
-          <div className='w-full mb-2 flex justify-end gap-2'>
+          {showSearch && 
+          ( <div className='w-full mb-2 flex justify-end gap-2'>
             { children }
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -151,6 +154,8 @@ export default function DataTable<TData>({
             </DropdownMenu>
             <SearchForm placeholder="Search..." paramKey="search" />
           </div>
+        )}
+          
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map(headerGroup => (
