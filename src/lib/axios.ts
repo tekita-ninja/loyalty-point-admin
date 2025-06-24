@@ -95,6 +95,20 @@ axiosInstance.interceptors.response.use(
         })
       }
     }
+    if(error.response?.status == 400) {
+      toast.error('Ups!', {
+        description: Array.isArray(error.response.data?.message)
+        ? error.response.data.message.join(', ')
+        : error.response.data?.message
+        || "Bad request!"
+      });
+    }
+
+    if(error.response?.status === 409) {
+      toast.error('Ups!', {
+        description: error.response.data?.message || "Conflict error!"
+      });
+    } 
 
     return Promise.reject(error);
   }

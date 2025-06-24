@@ -6,12 +6,12 @@ import axiosInstance from "@/lib/axios";
 import { TQueryParam } from "@/types/query";
 import { toObjectQuery } from "@/lib/utils";
 import { toast } from "sonner";
-import { TFormPermission } from "@/schema/permission";
+import { TFormPromotions } from "@/schema/master/promotions";
 
 const getList = async () => {
   const response = await axiosInstance({
     method: 'GET',
-    url: `permissions/all`
+    url: `promotion/all`
   })
   const data = response.data.data.map((item: any) => {
     return {
@@ -24,7 +24,7 @@ const getList = async () => {
 const getData = async (params?: TQueryParam) => {
   const response = await axiosInstance({
     method: 'GET',
-    url: `permissions`,
+    url: `promotion`,
     params
   })
   return response.data;
@@ -32,12 +32,12 @@ const getData = async (params?: TQueryParam) => {
 const getDetail = async (id: string) => {
   const response = await axiosInstance({
     method: 'GET',
-    url: `permissions/${id}`
+    url: `promotion/${id}`
   })
   return response.data;
 }
-const createData = async (payload: TFormPermission) => {
-  const response = await axiosInstance.post("permissions", payload);
+const createData = async (payload: TFormPromotions) => {
+  const response = await axiosInstance.post("promotion", payload);
   if (response.status === 201) {
     toast.success('Success', {
       description: "success create data"
@@ -46,8 +46,8 @@ const createData = async (payload: TFormPermission) => {
   return response.data;
 };
 
-const updateData = async ({ id, ...payload }: TFormPermission & { id: string }) => {
-  const response = await axiosInstance.patch(`permissions/${id}`, payload);
+const updateData = async ({ id, ...payload }: TFormPromotions & { id: string }) => {
+  const response = await axiosInstance.put(`promotion/${id}`, payload);
   if (response.status === 200) {
     toast.success('Success', {
       description: "success update data"
@@ -57,7 +57,7 @@ const updateData = async ({ id, ...payload }: TFormPermission & { id: string }) 
 };
 
 const deleteData = async (id: string) => {
-  const response = await axiosInstance.delete(`permissions/${id}`);
+  const response = await axiosInstance.delete(`promotion/${id}`);
   if (response.status === 200) {
     toast.success('Success', {
       description: "success delete data"
@@ -66,58 +66,40 @@ const deleteData = async (id: string) => {
   return response.data;
 };
 
-const syncData = async () => {
-  const response = await axiosInstance({
-    method: 'POST',
-    url: `permissions/sync`
-  })
-  if (response.status === 200) {
-    toast.success('Success', {
-      description: "success sync data"
-    })
-  }
-}
-
-export const usePermission = () => {
+export const usePromotions = () => {
   const searchString = useSearchParams();
   const query = toObjectQuery(searchString)
   const queryClient = useQueryClient();
 
 
   const options = useQuery({
-    queryKey: ["permissions_options"],
+    queryKey: ["promotiosn_options"],
     queryFn: () => getList(),
   });
   const get = useQuery({
-    queryKey: ["permissions", query],
+    queryKey: ["promotions", query],
     queryFn: () => getData(query),
   });
 
   const create = useMutation({
     mutationFn: createData,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["permissions"] });
+      queryClient.invalidateQueries({ queryKey: ["promotions"] });
     },
   });
   const update = useMutation({
     mutationFn: updateData,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["permissions"] });
+      queryClient.invalidateQueries({ queryKey: ["promotions"] });
     },
   });
   const remove = useMutation({
     mutationFn: deleteData,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["permissions"] });
+      queryClient.invalidateQueries({ queryKey: ["promotions"] });
     },
   });
 
-  const sync = useMutation({
-    mutationFn: syncData,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['permissions']})
-    }
-  });
 
   return {
     options: {
@@ -134,6 +116,5 @@ export const usePermission = () => {
     update,
     remove,
     getDetail,
-    sync
   };
 }

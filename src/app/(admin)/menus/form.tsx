@@ -58,10 +58,14 @@ export function FormMenu(props?: { data?: TResponseMenu }) {
     } else {
       create.mutate(values);
     }
+    form.reset();
     setDialog(false)
   }
   function onOpenChange(state:boolean) {
     setDialog(!dialog)
+    if(!props?.data?.id) {
+      form.reset()
+    }
     if (state && props?.data) {
       form.reset({
         title: props.data.title ?? '',

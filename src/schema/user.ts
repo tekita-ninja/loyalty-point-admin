@@ -3,12 +3,12 @@
 import { z } from "zod"
 
 export const formUserSchema = z.object({
-  firstname: z.string(),
-  lastname: z.string(),
-  email: z.string(),
-  phone: z.string(),
-  gender: z.string(),
-  birthDate: z.string()
+  firstname: z.string().min(1, { message: "Firstname is required" }),
+  lastname: z.string().min(1, { message: "Lastname is required" }),
+  email: z.string().min(1, { message: "Email is required" }).email({ message: "Invalid email address" }),
+  phone: z.string().min(1, { message: "Phone is required" }),
+  gender: z.enum(["MALE", "FEMALE"], { message: "Gender is required" }),
+  birthDate: z.string().min(1, { message: "Birth date is required" }),
 })
 
 export const formUserRoleSchema = z.object({
@@ -32,7 +32,7 @@ export type TResponseUser = {
   lastname: string
   email: string,
   phone: string,
-  gender: string,
+  gender: 'MALE' | 'FEMALE',
   birthDate: string,
   status: boolean
   roles: TRole[] | []

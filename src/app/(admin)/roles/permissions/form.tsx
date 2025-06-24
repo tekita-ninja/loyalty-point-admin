@@ -48,10 +48,14 @@ export function FormAction(props?: { data?: TResponsePermission }) {
     } else {
       create.mutate(values);
     }
+    form.reset()
     setDialog(false)
   }
   function onOpenChange(state:boolean) {
     setDialog(!dialog)
+    if(!props?.data?.id) {
+      form.reset()
+    }
     if (state && props?.data) {
       form.reset({
         name: props.data.name ?? '',

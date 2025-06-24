@@ -76,14 +76,15 @@ export default function SetPermissionContent({ roleId }: { roleId: string }) {
     <div className="pb-12">
       <div className="font-bold mb-2">Role: {detailRole?.name}</div>
       <div className="grid sm:grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
-        {
+        { 
+
           roleGroups && Object.entries(roleGroups).map(([group, items]) => (
             <Card key={group} className="border p-3 rounded-lg">
               <div className="flex items-center space-x-2 border-b pb-2">
                 <Checkbox onCheckedChange={(e: boolean) => handleCheckParent(e, group)} className="rounded" id={group} />
                 <Label className="font-bold text-base uppercase" htmlFor={group}>{group.split("-").join(" ")}</Label>
               </div>
-              <div>
+                <div>
                 {
                   items.map(item => (
                     <div key={item.id} className="flex my-1 items-center space-x-2">

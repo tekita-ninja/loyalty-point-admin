@@ -23,7 +23,8 @@ interface DataTableProps<TData> {
   pageIndex: number
   pageSize: number
   onPageChange: (pageIndex: number) => void
-  isLoading?: boolean
+  isLoading?: boolean;
+  children?: ReactNode
 }
 
 import {
@@ -41,7 +42,7 @@ import {
   PaginationLink
 } from "@/components/ui/pagination"
 import { ChevronLeft, ChevronRight, LucideSettings2 } from "lucide-react"
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import TableLoader from './loader'
 import { PageSizeSelector } from './page-size-selector'
 import { SearchForm } from './search-form'
@@ -53,7 +54,8 @@ export default function DataTable<TData>({
   pageIndex,
   pageSize,
   onPageChange,
-  isLoading
+  isLoading,
+  children
 }: DataTableProps<TData>) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const table = useReactTable({
@@ -117,6 +119,7 @@ export default function DataTable<TData>({
       {isLoading ? <TableLoader /> : (
         <div>
           <div className='w-full mb-2 flex justify-end gap-2'>
+            { children }
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline">

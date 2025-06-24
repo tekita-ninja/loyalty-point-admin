@@ -1,5 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
+import { Icon } from '@iconify/react'
 import {
   Dialog,
   DialogContent,
@@ -17,26 +18,26 @@ import {
   FormMessage
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-
-import { useRole } from "@/hooks/role/useRole"
-import { formRoleSchema, TFormRole, TResponseRole } from "@/schema/role"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { useState } from "react"
 import { RiAddLine, RiPencilLine } from "react-icons/ri"
+import { formBenefitSchema, TFormBenefit, TResponseBenefit } from "@/schema/master/benefit"
+import { useBenefit } from "@/hooks/master/useBenefit"
 
-export function FormAction(props?: { data?: TResponseRole }) {
+export function FormBenefit(props?: { data?: TResponseBenefit }) {
   const [dialog, setDialog] = useState(false)
-  const { create, update,lists } = useRole()
-  const form = useForm<TFormRole>({
-    resolver: zodResolver(formRoleSchema),
+  const { create, update } = useBenefit()
+
+  const form = useForm<TFormBenefit>({
+    resolver: zodResolver(formBenefitSchema),
     defaultValues: {
-      name: '',
-      code: '',
+      title: '',
+      description: '',
     }
   })
 
-  function onSubmit(values: TFormRole) {
+  function onSubmit(values: TFormBenefit) {
     if (props?.data?.id) {
        update.mutate({
         id: props.data.id,
@@ -45,7 +46,7 @@ export function FormAction(props?: { data?: TResponseRole }) {
     } else {
       create.mutate(values);
     }
-    form.reset()
+    form.reset();
     setDialog(false)
   }
   function onOpenChange(state:boolean) {
@@ -55,8 +56,8 @@ export function FormAction(props?: { data?: TResponseRole }) {
     }
     if (state && props?.data) {
       form.reset({
-        name: props.data.name ?? '',
-        code: props.data.code ?? '',
+        title: props.data.title ?? '',
+        description: props.data.description ?? '',
       })
     }
   }
@@ -76,23 +77,22 @@ export function FormAction(props?: { data?: TResponseRole }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-xl">
         <DialogHeader>
-          <DialogTitle>Form Role</DialogTitle>
+          <DialogTitle>Form Benefit</DialogTitle>
           <DialogDescription>
-            Form Create Or Update Role
+            Form Create Or Update Benefit
           </DialogDescription>
         </DialogHeader>
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-
               <FormField
                 control={form.control}
-                name="name"
+                name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input placeholder="name" {...field} />
+                      <Input placeholder="title" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -100,19 +100,19 @@ export function FormAction(props?: { data?: TResponseRole }) {
               />
               <FormField
                 control={form.control}
-                name="code"
+                name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Code</FormLabel>
+                    <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Input placeholder="code" {...field} />
+                      <Input placeholder="description" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <div className="flex justify-end">
-                <Button disabled={lists.isLoading} type="submit">Save</Button>
+                <Button disabled={create.isPending || update.isPending} type="submit">Save</Button>
               </div>
             </form>
           </Form>

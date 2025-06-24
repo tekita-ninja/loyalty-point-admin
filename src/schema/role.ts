@@ -3,8 +3,8 @@
 import { z } from "zod"
 
 export const formRoleSchema = z.object({
-  name: z.string(),
-  code: z.string()
+  name: z.string().min(1, { message: 'Name is required' }),
+  code: z.string().min(1, { message: 'Code is required' }),
 })
 
 export type TFormRole = z.infer<typeof formRoleSchema>

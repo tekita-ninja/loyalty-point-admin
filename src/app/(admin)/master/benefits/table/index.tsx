@@ -3,13 +3,13 @@ import DataTable from '@/components/datatable'
 import { Card } from '@/components/ui/card'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { columns } from './columns'
-import { useMenu } from '@/hooks/menu/useMenu'
+import { useBenefit } from '@/hooks/master/useBenefit'
 
 export default function Table() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const pageSize = 10
-  const { menus } = useMenu()
+  const { lists } = useBenefit()
 
   async function onPageChange(e: number) {
     const params = new URLSearchParams(searchParams.toString())
@@ -19,13 +19,13 @@ export default function Table() {
   return (
     <Card className='p-4'>
       <DataTable
-        data={menus.data?.data ?? []}
+        data={lists.data?.data ?? []}
         columns={columns}
-        pageCount={menus.data?.meta?.lastPage}
-        pageIndex={menus.data?.meta?.currentPage - 1 }
+        pageCount={lists.data?.meta?.lastPage}
+        pageIndex={lists.data?.meta?.currentPage - 1 }
         pageSize={pageSize}
         onPageChange={onPageChange}
-        isLoading={menus.isLoading}
+        isLoading={lists.isLoading}
       />
     </Card>
   )

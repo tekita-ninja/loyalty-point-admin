@@ -42,7 +42,7 @@ export function FormAction(props?: { data?: TResponseUser }) {
       lastname: '',
       email: '',
       phone: '',
-      gender: '',
+      gender: 'MALE',
       birthDate: ''
     }
   })
@@ -56,16 +56,20 @@ export function FormAction(props?: { data?: TResponseUser }) {
     } else {
       create.mutate(values);
     }
+    form.reset();
     setDialog(false)
   }
   function onOpenChange(state:boolean) {
     setDialog(!dialog)
+    if(!props?.data?.id) {
+      form.reset()
+    }
     if (state && props?.data) {
       form.reset({
         firstname: props.data.firstname ?? '',
         lastname: props.data.lastname ?? '',
         email: props.data.email ?? '',
-        gender: props.data.gender ?? '',
+        gender: props.data.gender ?? 'MALE',
         phone: props.data.phone ?? '',
         birthDate: props.data.birthDate ?? '',
       })

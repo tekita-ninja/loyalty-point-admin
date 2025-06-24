@@ -8,7 +8,7 @@ export interface MenuTreeNode extends TResponseMenu {
 
 export function createPermissionGroup(permissions: CheckPermissionItem[]) {
   const groupedByFirstSegment = permissions.reduce<GroupedPermissions>((acc, item) => {
-    const firstSegment = item.path.split("/")[0];
+    const firstSegment = item.path.split("/")[1];
     if (!acc[firstSegment]) {
       acc[firstSegment] = [];
     }

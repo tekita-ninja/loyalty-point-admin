@@ -12,3 +12,9 @@ export const toObjectQuery = (params: URLSearchParams): Record<string, string> =
   });
   return obj;
 };
+
+import dayjs from 'dayjs';
+
+export const formatToDDMMYYYY = (dateStr: string): string => {
+  return dayjs(dateStr).format('DD-MM-YYYY');
+}
