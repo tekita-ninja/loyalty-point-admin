@@ -1,5 +1,4 @@
 import { ColumnDef } from "@tanstack/react-table";
-import Image from "next/image";
 
 import PermissionContainer from "@/components/permission-container";
 import { FormPromotions } from "../form";

@@ -2,7 +2,6 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import PermissionContainer from "@/components/permission-container";
 import FormDelete from "../form-delete";
-import { TResponseCategory } from "@/schema/master/category";
 import { FormLocation } from "../form";
 import { TResponseLocation } from "@/schema/master/location";
 

@@ -3,7 +3,6 @@ import { FormAction } from './form'
 import PageContainer from '../../_components/containers/page-container'
 import Table from './table'
 import PermissionContainer from '@/components/permission-container'
-import { SyncButton } from './sync-button'
 
 export default function page() {
   return (

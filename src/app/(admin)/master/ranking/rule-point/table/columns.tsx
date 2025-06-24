@@ -1,9 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import Image from "next/image";
 
 import PermissionContainer from "@/components/permission-container";
 import FormDelete from "../form-delete";
-import { formatToDDMMYYYY } from "@/lib/utils";
 import { TResponseRulePoint } from "@/schema/master/rule-point";
 import { FormRulePoint } from "../form";
 
