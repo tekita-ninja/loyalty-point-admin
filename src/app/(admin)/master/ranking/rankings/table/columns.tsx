@@ -3,6 +3,8 @@ import { TResponseRanking } from "@/schema/master/ranking";
 import { FormRanking } from "../form";
 import FormDelete from "../form-delete";
 import PermissionContainer from "@/components/permission-container";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 
 export const columns: ColumnDef<TResponseRanking>[] = [
@@ -45,6 +47,16 @@ export const columns: ColumnDef<TResponseRanking>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-end gap-1">
+          <PermissionContainer permission='POST_ranking/assign-promotion'>
+            <Button size={'sm'} asChild>
+              <Link href={`/master/ranking/rankings/set-promotions?rankingId=${row.original.id}`}>Sign Promotions</Link>
+            </Button>
+          </PermissionContainer>
+          <PermissionContainer permission='POST_ranking/assign-benefit'>
+            <Button size={'sm'} asChild>
+              <Link href={`/master/ranking/rankings/set-benefits?rankingId=${row.original.id}`}>Sign Benefit</Link>
+            </Button>
+          </PermissionContainer>
           <PermissionContainer permission="PUT_ranking/:id">
             <FormRanking data={row.original} />
           </PermissionContainer>

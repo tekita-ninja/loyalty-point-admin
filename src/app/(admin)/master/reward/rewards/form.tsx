@@ -29,7 +29,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useCategory } from "@/hooks/master/useCategory";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import Image from "next/image";
 import { useFile } from "@/hooks/files/useFile";
 
 export function FormReward(props?: { data?: TResponseReward }) {
@@ -125,9 +124,9 @@ export function FormReward(props?: { data?: TResponseReward }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-xl">
         <DialogHeader>
-          <DialogTitle>Form Category</DialogTitle>
+          <DialogTitle>Form Rewards</DialogTitle>
           <DialogDescription>
-            Form Create Or Update Category
+            Form Create Or Update Rewards
           </DialogDescription>
         </DialogHeader>
         <div>
@@ -141,11 +140,10 @@ export function FormReward(props?: { data?: TResponseReward }) {
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger asChild>
-                                        <Image
+                                        <img
                                             src={form.watch("urlPicture")}
                                             alt="Promotion Picture"
-                                            width={100}
-                                            height={100}
+                                            className="max-h-24 object-cover rounded cursor-pointer"
                                             onClick={() => window.open(form.watch('urlPicture'), '_blank')}
                                         />
                                     </TooltipTrigger>
@@ -184,11 +182,11 @@ export function FormReward(props?: { data?: TResponseReward }) {
                     name="categoryId"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Rule Point</FormLabel>
+                        <FormLabel>Category</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                             <SelectTrigger>
-                            <SelectValue placeholder="Select rule point" />
+                            <SelectValue placeholder="Select category" />
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>

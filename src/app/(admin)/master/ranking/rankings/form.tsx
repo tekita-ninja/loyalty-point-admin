@@ -66,7 +66,7 @@ export function FormRanking(props?: { data?: TResponseRanking }) {
         name: props.data.name ?? '',
         minPoints: props.data.minPoints ?? 0,
         minSpendings: props.data.minSpendings ?? 0,
-        rulePointId:  props.data.rulePoint.id ?? '',
+        rulePointId:  props.data?.rulePoint?.id ?? '',
       })
     }
   }
@@ -86,9 +86,9 @@ export function FormRanking(props?: { data?: TResponseRanking }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-xl">
         <DialogHeader>
-          <DialogTitle>Form Promotions</DialogTitle>
+          <DialogTitle>Form Rankings</DialogTitle>
           <DialogDescription>
-            Form Create Or Update Promotions
+            Form Create Or Update Rankings
           </DialogDescription>
         </DialogHeader>
         <div>

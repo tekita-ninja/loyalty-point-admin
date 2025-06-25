@@ -76,6 +76,7 @@ export const useReward = () => {
     queryKey: ["reward_options"],
     queryFn: () => getList(),
   });
+  
   const get = useQuery({
     queryKey: ["reward", query],
     queryFn: () => getData(query),
