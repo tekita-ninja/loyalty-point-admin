@@ -1,6 +1,7 @@
 "use client"
 
 import { TResponseRanking } from "./master/ranking";
+import { TResponseUser } from "./user";
 
 // Define the type for customerPoints array elements
 export type TCustomerPoint = {
@@ -12,10 +13,15 @@ export type TCustomerPoint = {
   type: string;
   isCancel: boolean;
   isExpired: boolean;
+  user: TResponseUser;
+  createdBy: TResponseUser;
   rulePoint: {
     id: string;
     isActive: number;
     multiplier: number;
+    name: string;
+    startDate: string;
+    endDate: string;
   }
   transaction: {
     id: string;

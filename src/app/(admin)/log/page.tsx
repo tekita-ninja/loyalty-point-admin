@@ -1,10 +1,12 @@
-import TableCustomer from './table'
+
+
 import PageContainer from '@/app/(admin)/_components/containers/page-container'
+import TableLog from './table'
 
 export default function page() {
   return (
-    <PageContainer title='Customer' subtitle='List Of Customer'>
-      <TableCustomer />
+    <PageContainer title='Log' subtitle='List Of Log Points'>
+      <TableLog />
     </PageContainer>
   )
 }

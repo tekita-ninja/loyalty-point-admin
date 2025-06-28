@@ -8,10 +8,11 @@ import { toObjectQuery } from "@/lib/utils";
 import { toast } from "sonner";
 import { TFormReward } from "@/schema/master/reward";
 
-const getList = async () => {
+const getList = async (params?: TQueryParam) => {
   const response = await axiosInstance({
     method: 'GET',
-    url: `reward/all`
+    url: `reward`,
+    params
   })
   const data = response.data.data.map((item: any) => {
     return {
@@ -66,15 +67,15 @@ const deleteData = async (id: string) => {
   return response.data;
 };
 
-export const useReward = () => {
+export const useReward = (optionsParams? : TQueryParam) => {
   const searchString = useSearchParams();
   const query = toObjectQuery(searchString)
   const queryClient = useQueryClient();
 
 
   const options = useQuery({
-    queryKey: ["reward_options"],
-    queryFn: () => getList(),
+    queryKey: ["reward_options", optionsParams],
+    queryFn: () => getList(optionsParams),
   });
   
   const get = useQuery({
@@ -113,6 +114,11 @@ export const useReward = () => {
       isLoading: get.isLoading,
       error: get.error,
     },
+    rewardOptions: {
+      data: options.data,
+      isLoading: options.isLoading,
+      error: options.error,
+    }, 
     create,
     update,
     remove,

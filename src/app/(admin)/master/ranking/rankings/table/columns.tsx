@@ -32,7 +32,7 @@ export const columns: ColumnDef<TResponseRanking>[] = [
     cell: ({ row }) => {
         return (
             <div>
-                { row.original.minPoints }
+                {row.original.minPoints.toLocaleString('id-ID')}
             </div>
         )
     }

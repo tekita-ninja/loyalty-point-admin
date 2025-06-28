@@ -8,15 +8,19 @@ import { toObjectQuery } from "@/lib/utils";
 import { toast } from "sonner";
 import { TFormRulePoint } from "@/schema/master/rule-point";
 
-const getList = async () => {
+const getList = async (params?: TQueryParam) => {
   const response = await axiosInstance({
     method: 'GET',
-    url: `rule-point/all`
+    url: `rule-point`,
+    params: {
+      ...params,
+      date:  new Date().toISOString()
+    }
   })
   const data = response.data.data.map((item: any) => {
     return {
       value: item.id,
-      label: item.multiplier + 'x ',
+      label: item.name,
     }
   })
   return data;
@@ -66,15 +70,15 @@ const deleteData = async (id: string) => {
   return response.data;
 };
 
-export const useRulePoint = () => {
+export const useRulePoint = (optionsParams?: TQueryParam) => {
   const searchString = useSearchParams();
   const query = toObjectQuery(searchString)
   const queryClient = useQueryClient();
 
 
   const options = useQuery({
-    queryKey: ["rule-point_options"],
-    queryFn: () => getList(),
+    queryKey: ["rule-point_options", optionsParams],
+    queryFn: () => getList(optionsParams),
   });
   
   const get = useQuery({
@@ -104,6 +108,11 @@ export const useRulePoint = () => {
 
   return {
     options: {
+      data: options.data,
+      isLoading: options.isLoading,
+      error: options.error,
+    },
+    rulePointOptions: {
       data: options.data,
       isLoading: options.isLoading,
       error: options.error,

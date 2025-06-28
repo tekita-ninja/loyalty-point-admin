@@ -6,15 +6,16 @@ import axiosInstance from "@/lib/axios";
 import { TQueryParam } from "@/types/query";
 import { toObjectQuery } from "@/lib/utils";
 
-const getList = async () => {
+const getList = async (params?: TQueryParam) => {
   const response = await axiosInstance({
     method: 'GET',
-    url: `customer/all`
+    url: `customer`,
+    params
   })
   const data = response.data.data.map((item: any) => {
     return {
       value: item.id,
-      label: item.name,
+      label: `${item.firstname} ${item.lastname}`,
     }
   })
   return data;
@@ -35,25 +36,26 @@ const getDetail = async (id: string) => {
   return response.data;
 }
 
-export const useCustomer = () => {
+export const useCustomer = (optionsParams? : TQueryParam) => {
   const searchString = useSearchParams();
   const query = toObjectQuery(searchString)
 
 
-  const options = useQuery({
-    queryKey: ["customer_options"],
-    queryFn: () => getList(),
+  const customerOptions = useQuery({
+    queryKey: ["customer_options", , optionsParams],
+    queryFn: () => getList(optionsParams),
   });
+
   const get = useQuery({
     queryKey: ["customer", query],
     queryFn: () => getData(query),
   });
 
   return {
-    options: {
-      data: options.data,
-      isLoading: options.isLoading,
-      error: options.error,
+    customerOptions: {
+      data: customerOptions.data,
+      isLoading: customerOptions.isLoading,
+      error: customerOptions.error,
     },
     lists: {
       data: get.data,

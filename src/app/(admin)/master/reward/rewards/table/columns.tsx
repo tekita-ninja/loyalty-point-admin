@@ -19,17 +19,24 @@ export const columns: ColumnDef<TResponseReward>[] = [
   {
     accessorKey: 'stocks',
     header: 'Stocks',
+    cell: ({ row }) => {
+        const stocks = row.original.stocks;
+        return (
+            <span className="text-right">
+            {stocks ? stocks.toLocaleString('id-ID') : '-'}
+            </span>
+        )
+    }
   },
   {
     accessorKey: 'price',
     header: 'Point',
     cell: ({ row }) => {
+        const price = row.original.price;
         return (
-            <div>
-                {   
-                    row.original.price
-                }
-            </div>
+            <span className="text-right">
+            {price ? price.toLocaleString('id-ID') : '-'}
+            </span>
         )
     }
   },

@@ -8,10 +8,11 @@ import { toObjectQuery } from "@/lib/utils";
 import { toast } from "sonner";
 import { TFormLocation } from "@/schema/master/location";
 
-const getList = async () => {
+const getList = async (params?: TQueryParam) => {
   const response = await axiosInstance({
     method: 'GET',
-    url: `location/all`
+    url: `location`,
+    params
   })
   const data = response.data.data.map((item: any) => {
     return {
@@ -66,16 +67,17 @@ const deleteData = async (id: string) => {
   return response.data;
 };
 
-export const useLocation = () => {
+export const useLocation = (optionsParams? : TQueryParam) => {
   const searchString = useSearchParams();
-  const query = toObjectQuery(searchString)
+  const query = toObjectQuery(searchString);
   const queryClient = useQueryClient();
 
 
   const options = useQuery({
-    queryKey: ["location_options"],
-    queryFn: () => getList(),
+    queryKey: ["location_options", optionsParams],
+    queryFn: () => getList(optionsParams),
   });
+
   const get = useQuery({
     queryKey: ["location", query],
     queryFn: () => getData(query),
@@ -111,6 +113,11 @@ export const useLocation = () => {
       data: get.data,
       isLoading: get.isLoading,
       error: get.error,
+    },
+    locationOptions: {
+      data: options.data,
+      isLoading: options.isLoading,
+      error: options.error,
     },
     create,
     update,

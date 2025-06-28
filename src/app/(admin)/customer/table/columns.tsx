@@ -31,6 +31,13 @@ export const columns: ColumnDef<TResponseCustomer>[] = [
   {
     accessorKey: 'totalPoint',
     header: 'Total Point',
+    cell: ({ row }) => {
+      return (
+        <div>
+          {row.original.totalPoint.toLocaleString('id-ID')}
+        </div>
+      )
+    }
   },
   {
     id: "actions",

@@ -24,6 +24,7 @@ import { RiAddLine, RiPencilLine } from "react-icons/ri"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { formRulePointSchema, TFormRulePoint, TResponseRulePoint } from "@/schema/master/rule-point"
 import { useRulePoint } from "@/hooks/master/useRulePoint"
+import dayjs from "dayjs"
 
 export function FormRulePoint(props?: { data?: TResponseRulePoint }) {
   const [dialog, setDialog] = useState(false)
@@ -43,11 +44,17 @@ export function FormRulePoint(props?: { data?: TResponseRulePoint }) {
         id: props.data.id,
         multiplier: Number(values.multiplier),
         isActive: values.isActive === '1' ? 1 : 0,
+        name: values.name,
+        startDate: values.startDate || undefined,
+        endDate: values.endDate || undefined, 
       })
     } else {
       create.mutate({
         multiplier: Number(values.multiplier),
         isActive: values.isActive === '1' ? 1 : 0,
+        name: values.name,
+        startDate: values.startDate,
+        endDate: values.endDate,
       });
     }
     form.reset();
@@ -61,8 +68,11 @@ export function FormRulePoint(props?: { data?: TResponseRulePoint }) {
     }
     if (state && props?.data) {
       form.reset({
+        name: props.data.name ?? '',
         isActive: String(props.data.isActive) ?? '',
         multiplier: String(props.data.multiplier) ?? '',
+        startDate: props.data.startDate ? dayjs(props.data.startDate).format('YYYY-MM-DD') : undefined,
+        endDate: props.data.endDate ? dayjs(props.data.endDate).format('YYYY-MM-DD') : undefined,
       })
     }
   }
@@ -95,7 +105,19 @@ export function FormRulePoint(props?: { data?: TResponseRulePoint }) {
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-            
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <FormControl>
+                        <Input placeholder="Name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
                 <FormField
                     control={form.control}
                     name="multiplier"
@@ -131,6 +153,32 @@ export function FormRulePoint(props?: { data?: TResponseRulePoint }) {
                                }
                             </SelectContent>
                         </Select>
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="startDate"
+                    render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>Start Date</FormLabel>
+                        <FormControl>
+                        <Input type="date" placeholder="Start Date" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="endDate"
+                    render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>End Date</FormLabel>
+                        <FormControl>
+                        <Input type="date" placeholder="End Date" {...field} />
+                        </FormControl>
                         <FormMessage />
                     </FormItem>
                     )}
