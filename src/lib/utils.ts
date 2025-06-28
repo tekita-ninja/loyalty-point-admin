@@ -18,3 +18,15 @@ import dayjs from 'dayjs';
 export const formatToDDMMYYYY = (dateStr: string): string => {
   return dayjs(dateStr).format('DD-MM-YYYY');
 }
+
+export function toQueryParams(values: Record<string, any>): string {
+  const params = new URLSearchParams();
+
+  Object.entries(values).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      params.append(key, String(value));
+    }
+  });
+
+  return params.toString();
+}

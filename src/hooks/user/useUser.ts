@@ -77,11 +77,32 @@ const setUserRole = async (payload: TFormUserRole) => {
   return response.data;
 };
 
-export const useUser = () => {
+const getOptions = async (params?: TQueryParam) => {
+  const response = await axiosInstance({
+    method: 'GET',
+    url: `users`,
+    params
+  })
+
+  const data = response.data.data.map((item: any) => {
+    return {
+      value: item.id,
+      label: `${item.firstname} ${item.lastname}`,
+    }
+  })
+
+  return data;
+}
+
+export const useUser = (optionsParams?: TQueryParam) => {
   const searchString = useSearchParams();
   const query = toObjectQuery(searchString)
   const queryClient = useQueryClient();
 
+  const queryOptions = useQuery({
+    queryKey: ["users_option", optionsParams],
+    queryFn: () => getOptions(optionsParams),
+  });
 
   const queryUserAlls = useQuery({
     queryKey: ["users_all"],
@@ -129,6 +150,11 @@ export const useUser = () => {
       data: queryUsers.data,
       isLoading: queryUsers.isLoading,
       error: queryUsers.error,
+    },
+    userOptions: {
+      data: queryOptions.data,
+      isLoading: queryOptions.isLoading,
+      error: queryOptions.error,
     },
     create,
     update,

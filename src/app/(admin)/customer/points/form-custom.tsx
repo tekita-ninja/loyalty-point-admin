@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useState } from "react"
 
-import { formCustomCustomerPointSchema,TFormCustomCustomerPoint, TResponseCustomerPoint } from "@/schema/customer-poin";
+import { formCustomCustomerPointSchema,TFormCustomCustomerPoint } from "@/schema/customer-poin";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
@@ -23,7 +23,7 @@ import { useDebounceCallback } from "usehooks-ts"
 import { useCustomerPoints } from "@/hooks/customer/useCustomerPoints"
 import { useRouter } from "next/navigation"
 
-export function FormCustomPoint(props?: { data?: TResponseCustomerPoint }) {
+export function FormCustomPoint() {
     const { custom } = useCustomerPoints()
     const [openCustomer, setOpenCustomer] = useState(false)
     const [searchOptions, setSearchOptions] = useState<string>("")

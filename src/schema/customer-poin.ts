@@ -24,9 +24,19 @@ export const formCustomCustomerPointSchema = z.object({
     note: z.string().min(1, { message: 'Note is required' }),
 })
 
+export const formFilterCustomerPointSchema = z.object({
+    isCancel: z.string().optional(),
+    type: z.string().optional(),
+    userId: z.string().optional(),
+    rulePointId: z.string().optional(),
+    createdBy: z.string().optional(),
+})
+
 export type TFormCustomCustomerPoint = z.infer<typeof formCustomCustomerPointSchema>
 
 export type TFormAddCustomerPoint = z.infer<typeof formAddCustomerPointSchema>
+
+export type TFormFilterCustomerPoint= z.infer<typeof formFilterCustomerPointSchema>
 
 export type TResponseCustomerPoint = {
     id: string,

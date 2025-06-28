@@ -12,6 +12,17 @@ export const formTransactionSchema = z.object({
     note: z.string().min(1, { message: 'Note is required' }),
 })
 
+export const formFilterTransactionSchema = z.object({
+  locationId: z.string().optional(),
+  userId: z.string().optional(),
+  rewardId: z.string().optional(),
+  createdBy: z.string().optional(),
+  status: z.string().optional(),
+  expired: z.string().optional(),
+})
+
+export type TFormFilterTransaction = z.infer<typeof formFilterTransactionSchema>
+
 export type TFormTransaction = z.infer<typeof formTransactionSchema>
 
 export type TResponseTransaction = {

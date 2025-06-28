@@ -128,16 +128,16 @@ export const columns: ColumnDef<TResponseLog>[] = [
             )
         }
     },
-    {
-        id: "actions",
-        enableHiding: false,
-        cell: ({ row }) => {
-            return (
-                <div className="flex items-center gap-2">
-                    Details
-                </div>
-            )
-        }
-    }
+    // {
+    //     id: "actions",
+    //     enableHiding: false,
+    //     cell: ({ row }) => {
+    //         return (
+    //             <div className="flex items-center gap-2">
+    //                 Details
+    //             </div>
+    //         )
+    //     }
+    // }
 ]
 

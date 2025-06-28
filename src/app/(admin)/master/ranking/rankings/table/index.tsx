@@ -27,7 +27,7 @@ export default function TableRulePoint() {
         onPageChange={onPageChange}
         isLoading={lists.isLoading}
         showSearch={true}
-      />
+      /> 
     </Card>
   )
 }

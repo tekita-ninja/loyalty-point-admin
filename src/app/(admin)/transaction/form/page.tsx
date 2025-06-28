@@ -6,7 +6,7 @@ import { FormTransaction } from '../form-transaction'
 export default function page() {
     return (
         <PermissionContainer permission='POST_point/add'>
-            <PageContainer title='Form Customer Point' subtitle='Form Add Customer Point'>
+            <PageContainer title='Form Transaction' subtitle='Form Add Transaction'>
                 <div className="border border-gray-200 rounded-lg p-4 mb-4">
                     <FormTransaction />
                 </div>

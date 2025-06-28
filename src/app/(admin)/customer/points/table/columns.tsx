@@ -166,7 +166,7 @@ export const columns: ColumnDef<TResponseCustomerPoint>[] = [
 
 
                     </PermissionContainer>
-                    Details
+                    {/* Details */}
                 </div>
             )
         }

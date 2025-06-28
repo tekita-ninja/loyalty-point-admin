@@ -74,6 +74,18 @@ export const columns: ColumnDef<TResponseTransaction>[] = [
         }
     },
     {
+        accessorKey: 'expired',
+        header: 'Expired',
+        cell: ({ row }) => {
+            const expired = row.original.expired;
+            return (
+                <span className={`px-2 py-1 rounded-full text-xs ${new Date(expired) > new Date() ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                    { new Date(expired) < new Date() ? 'Expired' : 'Active' }
+                </span>
+            )
+        }
+    },
+    {
         accessorKey: 'createdByUser',
         header: 'Created By',
         cell: ({ row }) => {
@@ -94,16 +106,16 @@ export const columns: ColumnDef<TResponseTransaction>[] = [
             )
         }
     },
-    {
-        id: "actions",
-        enableHiding: false,
-        cell: ({ row }) => {
-            return (
-                <div className="flex items-center gap-2">
-                    Details
-                </div>
-            )
-        }
-    }
+    // {
+    //     id: "actions",
+    //     enableHiding: false,
+    //     cell: ({ row }) => {
+    //         return (
+    //             <div className="flex items-center gap-2">
+    //                 Details
+    //             </div>
+    //         )
+    //     }
+    // }
 ]
 

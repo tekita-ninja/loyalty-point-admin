@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useState } from "react"
 
-import { formAddCustomerPointSchema, TFormAddCustomerPoint, TResponseCustomerPoint } from "@/schema/customer-poin";
+import { formAddCustomerPointSchema, TFormAddCustomerPoint } from "@/schema/customer-poin";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
@@ -24,7 +24,7 @@ import { useRulePoint } from "@/hooks/master/useRulePoint"
 import { useCustomerPoints } from "@/hooks/customer/useCustomerPoints"
 import { useRouter } from "next/navigation"
 
-export function FormAddPoint(props?: { data?: TResponseCustomerPoint }) {
+export function FormAddPoint() {
     const { add } = useCustomerPoints()
     const [openCustomer, setOpenCustomer] = useState(false)
     const [openRulePoint, setOpenRulePoint] = useState(false)

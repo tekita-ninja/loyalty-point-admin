@@ -74,6 +74,10 @@ export const columns: ColumnDef<TResponseReward>[] = [
     }
   },
   {
+    accessorKey: 'totalLikes',
+    header: 'Total Likes'
+  },
+  {
       accessorKey: 'urlPicture',
       header: 'Image',
       cell: ({ row }) => {

@@ -10,10 +10,21 @@ export const formRewardSchema = z.object({
     startDate: z.string().min(1, { message: 'Start date is required' }),
     endDate: z.string().min(1, { message: 'End date is required' }),
     stocks: z.union([z.string(), z.number()]),
-    isLimited: z.union([z.string(), z.number()])
+    isLimited: z.union([z.string(), z.number()]),
 })
 
+export const formFilterRewardSchema = z.object({
+    categoryId: z.string().min(1, { message: 'Category is required' }).optional(),
+    startDate: z.string().min(1, { message: 'Start date is required' }).optional(),
+    endDate: z.string().min(1, { message: 'End date is required' }).optional(),
+    isLimited: z.union([z.string(), z.number()]).optional(),
+    isLowStock: z.union([z.string(), z.number()]).optional()
+})
+
+
 export type TFormReward = z.infer<typeof formRewardSchema>
+
+export type TFormFilterReward = z.infer<typeof formFilterRewardSchema>
 
 export type TResponseReward= {
     id: string,

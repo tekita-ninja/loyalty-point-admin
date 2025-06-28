@@ -20,12 +20,12 @@ import { useCustomer } from "@/hooks/customer/useCustomer";
 import { cn } from "@/lib/utils";
 import { useDebounceCallback } from "usehooks-ts"
 import { useRouter } from "next/navigation"
-import { formTransactionSchema, TFormTransaction, TResponseTransaction } from "@/schema/transaction"
+import { formTransactionSchema, TFormTransaction } from "@/schema/transaction"
 import { useTransaction } from "@/hooks/transaction/useTransaction"
 import { useLocation } from "@/hooks/master/useLocation"
 import { useReward } from "@/hooks/master/useReward"
 
-export function FormTransaction(props?: { data?: TResponseTransaction }) {
+export function FormTransaction() {
     const { create } = useTransaction()
     const [openCustomer, setOpenCustomer] = useState(false)
     const [openLocation, setOpenLocation] = useState(false)

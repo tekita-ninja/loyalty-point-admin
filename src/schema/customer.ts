@@ -1,9 +1,16 @@
 "use client"
 
+import { z } from "zod";
 import { TResponseRanking } from "./master/ranking";
 import { TResponseUser } from "./user";
 
-// Define the type for customerPoints array elements
+export const formFilterCustomer = z.object({
+    rankingId: z.string().min(1, { message: 'Ranking is required' }).optional(),
+})
+
+export type TFormFilterCustomer = z.infer<typeof formFilterCustomer>
+
+
 export type TCustomerPoint = {
   id: string;
   transactionId: string;

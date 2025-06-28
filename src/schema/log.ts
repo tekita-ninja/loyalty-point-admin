@@ -2,6 +2,17 @@
 
 import { TResponseUser } from "./user"
 import { TCustomerPoint } from "./customer"
+import { z } from "zod"
+
+export const formFilterLogSchema = z.object({
+  userId: z.string().optional(),
+  createdBy: z.string().optional(),
+  action: z.string().optional(),
+  type: z.string().optional(),
+
+})
+
+export type TFormFilterLog = z.infer<typeof formFilterLogSchema>
 
 
 export type TResponseLog = {

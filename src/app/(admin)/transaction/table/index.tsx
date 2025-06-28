@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { columns } from './columns'
 import { useTransaction } from '@/hooks/transaction/useTransaction'
+import { FormFilterTransaction } from '../dialog/form-filter'
 
 export default function TableTransaction() {
   const router = useRouter()
@@ -26,7 +27,11 @@ export default function TableTransaction() {
         pageSize={pageSize}
         onPageChange={onPageChange}
         isLoading={lists.isLoading}
-      />
+      >
+        <div>
+          <FormFilterTransaction />
+        </div>
+      </DataTable>
     </Card>
   )
 }

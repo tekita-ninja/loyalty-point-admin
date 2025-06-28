@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { columns } from './columns'
 import { useLog } from '@/hooks/log/useLog'
+import { FormFilterLog } from '../dialog/form-filter'
 
 export default function TableLog() {
   const router = useRouter()
@@ -26,7 +27,11 @@ export default function TableLog() {
         pageSize={pageSize}
         onPageChange={onPageChange}
         isLoading={lists.isLoading}
-      />
+      >
+        <div>
+          <FormFilterLog />
+        </div>
+      </DataTable>
     </Card>
   )
 }

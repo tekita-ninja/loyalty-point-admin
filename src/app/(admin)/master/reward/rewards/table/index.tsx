@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { columns } from './columns'
 import { useReward } from '@/hooks/master/useReward'
+import { FormFilterReward } from '../Dialog/form-filter'
 
 export default function TableReward() {
   const router = useRouter()
@@ -26,7 +27,11 @@ export default function TableReward() {
         pageSize={pageSize}
         onPageChange={onPageChange}
         isLoading={lists.isLoading}
-      />
+      >
+        <div className="">
+          <FormFilterReward />
+        </div>
+      </DataTable>
     </Card>
   )
 }

@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { columns } from './columns'
 import { useCustomerPoints } from '@/hooks/customer/useCustomerPoints'
+import { FormFilterPoint } from '../dialog/form-filter'
 
 export default function TablePoint() {
   const router = useRouter()
@@ -26,7 +27,11 @@ export default function TablePoint() {
         pageSize={pageSize}
         onPageChange={onPageChange}
         isLoading={lists.isLoading}
-      />
+      >
+        <div>
+          <FormFilterPoint />
+        </div>
+      </DataTable>
     </Card>
   )
 }

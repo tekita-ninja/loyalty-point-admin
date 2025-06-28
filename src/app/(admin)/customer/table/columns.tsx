@@ -39,16 +39,16 @@ export const columns: ColumnDef<TResponseCustomer>[] = [
       )
     }
   },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      return (
-        <div className="flex items-center gap-2">
-          Detail
-        </div>
-      )
-    }
-  }
+  // {
+  //   id: "actions",
+  //   enableHiding: false,
+  //   cell: ({ row }) => {
+  //     return (
+  //       <div className="flex items-center gap-2">
+  //         Detail
+  //       </div>
+  //     )
+  //   }
+  // }
 ]
 

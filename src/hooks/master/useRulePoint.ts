@@ -25,6 +25,20 @@ const getList = async (params?: TQueryParam) => {
   })
   return data;
 }
+
+const getAllList = async () => {
+  const response = await axiosInstance({
+    method: 'GET',
+    url: `rule-point/all`,
+  })
+  const data = response.data.data.map((item: any) => {
+    return {
+      value: item.id,
+      label: item.name,
+    }
+  })
+  return data;
+}
 const getData = async (params?: TQueryParam) => {
   const response = await axiosInstance({
     method: 'GET',
@@ -80,6 +94,11 @@ export const useRulePoint = (optionsParams?: TQueryParam) => {
     queryKey: ["rule-point_options", optionsParams],
     queryFn: () => getList(optionsParams),
   });
+
+  const allOptions = useQuery({
+    queryKey: ["rule-point_all_options"],
+    queryFn: getAllList,
+  });
   
   const get = useQuery({
     queryKey: ["rule-point", query],
@@ -116,6 +135,11 @@ export const useRulePoint = (optionsParams?: TQueryParam) => {
       data: options.data,
       isLoading: options.isLoading,
       error: options.error,
+    },
+    ruleAllPointOptions: {
+      data: allOptions.data,
+      isLoading: allOptions.isLoading,
+      error: allOptions.error,
     },
     lists: {
       data: get.data,
