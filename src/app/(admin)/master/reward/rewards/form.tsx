@@ -30,9 +30,11 @@ import { useCategory } from "@/hooks/master/useCategory";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useFile } from "@/hooks/files/useFile";
+import { set } from "zod";
 
 export function FormReward(props?: { data?: TResponseReward }) {
   const [dialog, setDialog] = useState(false)
+  const [limited, setLimited] = useState('0')
   const { create, update } = useReward()
   const { options } = useCategory()
   const { upload } = useFile()
@@ -40,20 +42,20 @@ export function FormReward(props?: { data?: TResponseReward }) {
   const form = useForm<TFormReward>({
     resolver: zodResolver(formRewardSchema),
     defaultValues: {
-        name: '',
-        urlPicture: '',
-        price: '',
-        categoryId: '',
-        startDate: '',
-        endDate: '',
-        stocks: '',
-        isLimited: ''
+      name: '',
+      urlPicture: '',
+      price: '',
+      categoryId: '',
+      startDate: undefined,
+      endDate: undefined,
+      stocks: '',
+      isLimited: ''
     }
   })
 
   function onSubmit(values: TFormReward) {
     if (props?.data?.id) {
-       update.mutate({
+      update.mutate({
         id: props.data.id,
         ...values,
         isLimited: values.isLimited === '1' ? 1 : 0,
@@ -71,9 +73,10 @@ export function FormReward(props?: { data?: TResponseReward }) {
     form.reset();
     setDialog(false)
   }
-  function onOpenChange(state:boolean) {
+  function onOpenChange(state: boolean) {
     setDialog(!dialog)
-    if(!props?.data?.id) {
+    setLimited('0')
+    if (!props?.data?.id) {
       form.reset()
     }
     if (state && props?.data) {
@@ -95,14 +98,14 @@ export function FormReward(props?: { data?: TResponseReward }) {
     if (!file) return;
 
     upload.mutate(
-        { file, folder: 'rewards' },
-        {
-            onSuccess: (url) => {
-                form.setValue("urlPicture", url);
-            },
-        }
+      { file, folder: 'rewards' },
+      {
+        onSuccess: (url) => {
+          form.setValue("urlPicture", url);
+        },
+      }
     );
- }
+  }
 
   const isLimitedOptions = [
     { value: '1', label: "Ya" },
@@ -118,7 +121,7 @@ export function FormReward(props?: { data?: TResponseReward }) {
               <RiPencilLine />
             </Button>
           ) : (
-              <Button className="w-full flex justify-start items-center"> <RiAddLine /> Add New</Button>
+            <Button className="w-full flex justify-start items-center"> <RiAddLine /> Add New</Button>
           )
         }
       </DialogTrigger>
@@ -132,38 +135,38 @@ export function FormReward(props?: { data?: TResponseReward }) {
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-                <div className="grid gap-2">
+              <div className="grid gap-2">
                 <Label htmlFor="picture">Picture</Label>
                 {
-                    form.watch("urlPicture") && (
+                  form.watch("urlPicture") && (
                     <div className="flex items-center gap-2 cursor-pointer">
-                            <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        <img
-                                            src={form.watch("urlPicture")}
-                                            alt="Promotion Picture"
-                                            className="max-h-24 object-cover rounded cursor-pointer"
-                                            onClick={() => window.open(form.watch('urlPicture'), '_blank')}
-                                        />
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                        <p>Open image</p>
-                                    </TooltipContent>
-                                </Tooltip>
-                            </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <img
+                              src={form.watch("urlPicture")}
+                              alt="Promotion Picture"
+                              className="max-h-24 object-cover rounded cursor-pointer"
+                              onClick={() => window.open(form.watch('urlPicture'), '_blank')}
+                            />
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Open image</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
-                    )
+                  )
                 }
                 <div className="grid w-full max-w-sm items-center gap-3">
-                    <Input 
-                        id="picture"
-                        type="file" 
-                        accept="image/*"
-                        onChange={handleUploadFile}
-                     />
+                  <Input
+                    id="picture"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleUploadFile}
+                  />
                 </div>
-            </div>
+              </div>
               <FormField
                 control={form.control}
                 name="name"
@@ -178,33 +181,33 @@ export function FormReward(props?: { data?: TResponseReward }) {
                 )}
               />
               <FormField
-                    control={form.control}
-                    name="categoryId"
-                    render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Category</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                            <SelectTrigger>
-                            <SelectValue placeholder="Select category" />
-                            </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                            {
-                                options.data && options.data.length > 0 && options.data.map((item: any) => (
-                                    <SelectItem key={item.value} value={item.value} className="cursor-pointer hover:bg-slate-100">
-                                        <div className="flex items-center gap-2">
-                                            {item.label}
-                                        </div>
-                                    </SelectItem>
-                                ))
-                            }
-                        </SelectContent>
-                        </Select>
-                        <FormMessage />
-                    </FormItem>
-                    )}
-                />
+                control={form.control}
+                name="categoryId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {
+                          options.data && options.data.length > 0 && options.data.map((item: any) => (
+                            <SelectItem key={item.value} value={item.value} className="cursor-pointer hover:bg-slate-100">
+                              <div className="flex items-center gap-2">
+                                {item.label}
+                              </div>
+                            </SelectItem>
+                          ))
+                        }
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="stocks"
@@ -233,37 +236,16 @@ export function FormReward(props?: { data?: TResponseReward }) {
               />
               <FormField
                 control={form.control}
-                name="startDate"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Start Date</FormLabel>
-                    <FormControl>
-                      <Input placeholder="startDate" {...field} type="date"  />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="endDate"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>End Date</FormLabel>
-                    <FormControl>
-                      <Input placeholder="endDate" {...field} type="date" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name="isLimited"
                 render={({ field }) => (
-                 <FormItem>
+                  <FormItem>
                     <FormLabel>Limited</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={(value) => {
+                      field.onChange(value)
+                      setLimited(value)
+                    }}
+                      defaultValue={field.value}
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a choice" />
@@ -285,6 +267,38 @@ export function FormReward(props?: { data?: TResponseReward }) {
                   </FormItem>
                 )}
               />
+              {
+                limited === '1' && (
+                  <>
+                    <FormField
+                      control={form.control}
+                      name="startDate"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Start Date</FormLabel>
+                          <FormControl>
+                            <Input placeholder="startDate" {...field} type="date" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="endDate"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>End Date</FormLabel>
+                          <FormControl>
+                            <Input placeholder="endDate" {...field} type="date" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </>
+                )
+              }
               <div className="flex justify-end">
                 <Button disabled={create.isPending || update.isPending} type="submit">Save</Button>
               </div>

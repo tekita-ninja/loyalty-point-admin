@@ -46,7 +46,8 @@ export const columns: ColumnDef<TResponseReward>[] = [
     cell: ({ row }) => {
         return (
             <div>
-                {formatToDDMMYYYY(row.original.startDate)}
+                { row.original.startDate ? formatToDDMMYYYY(row.original.startDate) 
+                  : ( <span className="text-gray-500">No Start Date</span> )}
             </div>
         )
     }
@@ -57,7 +58,8 @@ export const columns: ColumnDef<TResponseReward>[] = [
     cell: ({ row }) => {
         return (
             <div>
-                {formatToDDMMYYYY(row.original.endDate)}
+                { row.original.endDate ? formatToDDMMYYYY(row.original.endDate) 
+                  : ( <span className="text-gray-500">No End Date</span> )}
             </div>
         )
     }

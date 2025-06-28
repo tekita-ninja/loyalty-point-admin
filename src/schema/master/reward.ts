@@ -7,8 +7,8 @@ export const formRewardSchema = z.object({
     urlPicture: z.string().min(1, { message: 'Picture URL is required' }),
     price: z.union([z.string(), z.number()]),
     categoryId: z.string().min(1, { message: 'Category is required' }),
-    startDate: z.string().min(1, { message: 'Start date is required' }),
-    endDate: z.string().min(1, { message: 'End date is required' }),
+    startDate: z.string().min(1, { message: 'Start date is required' }).optional(),
+    endDate: z.string().min(1, { message: 'End date is required' }).optional(),
     stocks: z.union([z.string(), z.number()]),
     isLimited: z.union([z.string(), z.number()]),
 })
