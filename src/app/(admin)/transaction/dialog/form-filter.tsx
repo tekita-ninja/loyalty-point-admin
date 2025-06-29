@@ -109,8 +109,8 @@ export function FormFilterTransaction() {
     }, 1000)
 
     const isLimitedOptions = [
-        { value: '1', label: "Ya" },
-        { value: '0', label: "Tidak" },
+        { value: '1', label: "Yes" },
+        { value: '0', label: "No" },
     ];
 
     return (

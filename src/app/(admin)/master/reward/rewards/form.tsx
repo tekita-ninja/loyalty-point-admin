@@ -30,7 +30,6 @@ import { useCategory } from "@/hooks/master/useCategory";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useFile } from "@/hooks/files/useFile";
-import { set } from "zod";
 
 export function FormReward(props?: { data?: TResponseReward }) {
   const [dialog, setDialog] = useState(false)
@@ -38,6 +37,7 @@ export function FormReward(props?: { data?: TResponseReward }) {
   const { create, update } = useReward()
   const { options } = useCategory()
   const { upload } = useFile()
+  
 
   const form = useForm<TFormReward>({
     resolver: zodResolver(formRewardSchema),
@@ -80,13 +80,14 @@ export function FormReward(props?: { data?: TResponseReward }) {
       form.reset()
     }
     if (state && props?.data) {
+      setLimited(String(props.data.isLimited ?? '0'))
       form.reset({
         name: props.data.name ?? '',
         urlPicture: props.data.urlPicture ?? '',
         price: props.data.price ?? 0,
         categoryId: props.data.category?.id ?? '',
-        startDate: props.data.startDate ? dayjs(props.data.startDate).format('YYYY-MM-DD') : '',
-        endDate: props.data.endDate ? dayjs(props.data.endDate).format('YYYY-MM-DD') : '',
+        startDate: props.data.startDate ? dayjs(props.data.startDate).format('YYYY-MM-DD') : undefined,
+        endDate: props.data.endDate ? dayjs(props.data.endDate).format('YYYY-MM-DD') : undefined,
         stocks: props.data.stocks ?? 0,
         isLimited: typeof props.data.isLimited === 'number' ? String(props.data.isLimited) : '0'
       })
@@ -108,8 +109,8 @@ export function FormReward(props?: { data?: TResponseReward }) {
   }
 
   const isLimitedOptions = [
-    { value: '1', label: "Ya" },
-    { value: '0', label: "Tidak" },
+    { value: '1', label: "Yes" },
+    { value: '0', label: "No" },
   ];
 
   return (

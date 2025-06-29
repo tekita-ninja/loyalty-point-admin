@@ -18,7 +18,8 @@ export const formFilterRewardSchema = z.object({
     startDate: z.string().min(1, { message: 'Start date is required' }).optional(),
     endDate: z.string().min(1, { message: 'End date is required' }).optional(),
     isLimited: z.union([z.string(), z.number()]).optional(),
-    isLowStock: z.union([z.string(), z.number()]).optional()
+    isLowStock: z.union([z.string(), z.number()]).optional(),
+    topLikes: z.union([z.string(), z.number()]).optional(),
 })
 
 

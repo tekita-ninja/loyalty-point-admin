@@ -24,7 +24,7 @@ export const columns: ColumnDef<TResponseTransaction>[] = [
         cell: ({ row }) => {
             const location = row.original.location;
             return (
-                <div className="flex flex-col">
+                <div className="w-56 flex flex-col">
                     <span className="font-semibold">{location.name}</span>
                     <span className="text-sm text-gray-500">{location.address}</span>
                 </div>
@@ -37,10 +37,10 @@ export const columns: ColumnDef<TResponseTransaction>[] = [
         cell: ({ row }) => {
             const reward = row.original.reward;
             return (
-                <div className="flex flex-col">
-                    <span className="font-semibold">{reward.name}</span>
-                    <span className="text-sm text-gray-500">{reward.category.name}</span>
-                    <span className="text-sm text-gray-500">{reward.price.toLocaleString('id-ID')}</span>
+                <div className="w-36 flex flex-col">
+                    <span className="font-semibold">Name: {reward.name}</span>
+                    <span className="text-sm text-gray-500">Category: {reward.category.name}</span>
+                    <span className="text-sm text-gray-500">Cut Point: {reward.price.toLocaleString('id-ID')}</span>
                 </div>
             )
         }
@@ -51,8 +51,19 @@ export const columns: ColumnDef<TResponseTransaction>[] = [
         cell: ({ row }) => {
             const cutpoint = row.original.cutPoint;
             return (
-                <div className="flex flex-col">
+                <div className="w-32 flex flex-col">
                     <span className="font-semibold">{cutpoint.toLocaleString('id-ID')}</span>
+                </div>
+            )
+        }
+    },
+    {
+        accessorKey: 'qty',
+        header: 'Quantity',
+        cell: ({ row }) => {
+            return (
+                <div className="w-32 flex flex-col">
+                    <span className="font-semibold">{row.original.qty}</span>
                 </div>
             )
         }
@@ -60,6 +71,14 @@ export const columns: ColumnDef<TResponseTransaction>[] = [
     {
         accessorKey: 'note',
         header: 'Notes',
+        cell: ({ row }) => {
+            const note = row.original.note;
+            return (
+                <div className="w-36">
+                    <span className="text-sm text-gray-500">{note || '-'}</span>
+                </div>
+            )
+        }
     },
     {
         accessorKey: 'status',
@@ -91,7 +110,7 @@ export const columns: ColumnDef<TResponseTransaction>[] = [
         cell: ({ row }) => {
             const createdByUser = row.original.createdByUser;
             return (
-                <div className="flex flex-col">
+                <div className="w-32">
                     <span className="font-semibold">{createdByUser?.firstname} {createdByUser?.lastname}</span>
                 </div>
             )
@@ -102,7 +121,7 @@ export const columns: ColumnDef<TResponseTransaction>[] = [
         header: 'Created At',
         cell: ({ row }) => {
             return (
-                <span>{formatToDDMMYYYY(row.original.createdAt)}</span>
+                <div className="w-24">{formatToDDMMYYYY(row.original.createdAt)}</div>
             )
         }
     },

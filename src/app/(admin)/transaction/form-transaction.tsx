@@ -44,6 +44,7 @@ export function FormTransaction() {
             userId: '',
             locationId: '',
             rewardId: '',
+            qty: '',
             note: '',
         }
     })
@@ -51,9 +52,13 @@ export function FormTransaction() {
     function onSubmit(values: TFormTransaction) {
           create.mutate({
             ...values,
+            qty: parseInt(values.qty),
+          }, {
+            onSuccess: () => {
+                form.reset();
+                router.push('/transaction')
+            }
           });
-        form.reset();
-        router.push('/transaction')
     }
     function handleClickCustomerSelect() {
         setOpenCustomer(false);
@@ -246,12 +251,25 @@ export function FormTransaction() {
                     />
                     <FormField
                         control={form.control}
+                        name="qty"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Quantity</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Quantity" type="number" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
                         name="note"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Notes</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="notes" type="string" {...field} />
+                                    <Input placeholder="notes" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

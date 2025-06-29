@@ -6,6 +6,7 @@ import BtnMenuMobile from './btn-menu-mobile'
 import DropdownMenuAdmin from './dropdown-menu-admin'
 import Breadcrumb from './breadcrumb'
 import { usePathname } from 'next/navigation'
+import NotificationMenu from './notification-menu'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -22,6 +23,7 @@ export default function Navbar() {
             </div>
           </div>
           <div className='flex items-center gap-2'>
+            <NotificationMenu />
             <DropdownMenuAdmin />
             <ModeToggle />
             <BtnMenuMobile setIsHidden={setIsHidden} isHidden={isHidden} />

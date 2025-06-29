@@ -26,26 +26,33 @@ export const columns: ColumnDef<TResponseCustomerPoint>[] = [
         cell: ({ row }) => {
             const transaction = row.original.transaction;
             return (
-                transaction ? (
-                <span className="text-left">
-                    <div className="flex flex-col">
-                        <span className="font-semibold">
-                            Cut: {transaction?.cutPoint || '-'}
-                        </span>
-                        <span className="text-sm text-gray-500">
-                            Note: {transaction?.note || '-'}
-                        </span>
-                        <span className="text-sm text-gray-500">
-                            Reward: {transaction?.reward?.name || '-'}
-                        </span>
-                        <span className="text-sm text-gray-500">
-                            Location: {transaction?.location?.name || '-'}
-                        </span>
-                    </div>
-                </span>
-                ) : (
-                    <div className="text-gray-500">No Transaction</div>
-                )
+                <div className="w-64">
+                    {
+                        transaction ? (
+                            <span className="text-left">
+                                <div className="flex flex-col">
+                                    <span className="font-semibold">
+                                        Cut Point: {transaction?.cutPoint || '-'}
+                                    </span>
+                                    <span className="text-sm text-gray-500">
+                                        Qty: {transaction?.qty || '-'}
+                                    </span>
+                                    <span className="text-sm text-gray-500">
+                                        Note: {transaction?.note || '-'}
+                                    </span>
+                                    <span className="text-sm text-gray-500">
+                                        Reward: {transaction?.reward?.name || '-'}
+                                    </span>
+                                    <span className="text-sm text-gray-500">
+                                        Location: {transaction?.location?.name || '-'}
+                                    </span>
+                                </div>
+                            </span>
+                        ) : (
+                            <div className="text-gray-500">No Transaction</div>
+                        )
+                    }
+                </div>
             )
         }
     },
@@ -55,18 +62,22 @@ export const columns: ColumnDef<TResponseCustomerPoint>[] = [
         cell: ({ row }) => {
             const rulePoint = row.original.rulePoint;
             return (
-                rulePoint ? (
-                    <div className="flex flex-col">
-                        <span className="font-semibold">
-                            Name: {rulePoint.name || '-'}
-                        </span>
-                        <span className="text-sm text-gray-500">
-                            Multiplier: {`${rulePoint.multiplier}x` || '-'}
-                        </span>
-                    </div>
-                ) : (
-                    <div className="text-gray-500">No Rule Point</div>
-                )
+                <div className="w-32">
+                    {
+                        rulePoint ? (
+                            <div className="flex flex-col">
+                                <span className="font-semibold">
+                                    Name: {rulePoint.name || '-'}
+                                </span>
+                                <span className="text-sm text-gray-500">
+                                    Multiplier: {`${rulePoint.multiplier}x` || '-'}
+                                </span>
+                            </div>
+                        ) : (
+                            <div className="text-gray-500">No Rule Point</div>
+                        )
+                    }
+                </div>
             )
         }
     },
@@ -97,6 +108,14 @@ export const columns: ColumnDef<TResponseCustomerPoint>[] = [
     {
         accessorKey: 'note',
         header: 'Notes',
+        cell: ({ row }) => {
+            const note = row.original.note;
+            return (
+                <div className="w-36">
+                    <span className="text-sm text-gray-500">{note || '-'}</span>
+                </div>
+            )
+        }
     },
     {
         accessorKey: 'type',
@@ -105,7 +124,7 @@ export const columns: ColumnDef<TResponseCustomerPoint>[] = [
             const type = row.original.type;
             return (
                 <span className="text-center">
-                {EnumPointTypeLabels[type as EnumPointType] || 'Unknown'}
+                    {EnumPointTypeLabels[type as EnumPointType] || 'Unknown'}
                 </span>
             )
         }
@@ -140,7 +159,7 @@ export const columns: ColumnDef<TResponseCustomerPoint>[] = [
         cell: ({ row }) => {
             const createdByUser = row.original.createdByUser;
             return (
-                <div className="flex flex-col">
+                <div className="w-32">
                     <span className="font-semibold">{createdByUser.firstname} {createdByUser.lastname}</span>
                 </div>
             )
@@ -151,7 +170,7 @@ export const columns: ColumnDef<TResponseCustomerPoint>[] = [
         header: 'Created At',
         cell: ({ row }) => {
             return (
-                <span>{formatToDDMMYYYY(row.original.createdAt)}</span>
+                <div className="w-28">{formatToDDMMYYYY(row.original.createdAt)}</div>
             )
         }
     },

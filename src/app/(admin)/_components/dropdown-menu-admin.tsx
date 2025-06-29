@@ -25,13 +25,7 @@ export default function DropdownMenuAdmin() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" side="bottom" align="end">
-        <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Profile
-          <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuItem>Documentation</DropdownMenuItem>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <button className="w-full cursor-pointer" onClick={handleLogout}>

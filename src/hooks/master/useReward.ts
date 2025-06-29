@@ -86,19 +86,19 @@ export const useReward = (optionsParams? : TQueryParam) => {
   const create = useMutation({
     mutationFn: createData,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["reward"] });
+      queryClient.invalidateQueries({ queryKey: ["reward", 'dashboard_notification'] });
     },
   });
   const update = useMutation({
     mutationFn: updateData,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["reward"] });
+      queryClient.invalidateQueries({ queryKey: ["reward", 'dashboard_notification'] });
     },
   });
   const remove = useMutation({
     mutationFn: deleteData,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["reward"] });
+      queryClient.invalidateQueries({ queryKey: ["reward", 'dashboard_notification'] });
     },
   });
 

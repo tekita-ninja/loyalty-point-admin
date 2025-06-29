@@ -41,7 +41,7 @@ export const useTransaction = () => {
   const create = useMutation({
     mutationFn: createData,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["transaction"] });
+      queryClient.invalidateQueries({ queryKey: ["transaction", 'dashboard_notification'] });
     },
   });
 

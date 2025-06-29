@@ -44,10 +44,12 @@ export function FormFilterReward(props?: { data?: TResponseReward }) {
         endDate: undefined,
         isLimited: undefined,
         isLowStock: undefined,
+        topLikes: undefined,
     }
   })
 
   function onSubmit(values: TFormFilterReward) {
+    
     const params = toQueryParams(values)
     router.push('/master/reward/rewards?' + params)
     form.reset();
@@ -63,8 +65,8 @@ export function FormFilterReward(props?: { data?: TResponseReward }) {
 
 
   const isLimitedOptions = [
-    { value: '1', label: "Ya" },
-    { value: '0', label: "Tidak" },
+    { value: '1', label: "Yes" },
+    { value: '0', label: "No" },
   ];
 
   return (
@@ -140,6 +142,34 @@ export function FormFilterReward(props?: { data?: TResponseReward }) {
                     <FormControl>
                       <Input placeholder="endDate" {...field} type="date" />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="topLikes"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Top Likes</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a choice" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {
+                          isLimitedOptions && isLimitedOptions.length > 0 && isLimitedOptions.map((item: any) => (
+                            <SelectItem key={item.value} value={item.value} className="cursor-pointer hover:bg-slate-100">
+                              <div className="flex items-center gap-2">
+                                {item.label}
+                              </div>
+                            </SelectItem>
+                          ))
+                        }
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
