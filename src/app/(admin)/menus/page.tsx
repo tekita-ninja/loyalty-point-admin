@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import PageContainer from '../_components/containers/page-container'
 import { FormMenu } from './form'
 import TableMenu from './table'
@@ -13,7 +13,9 @@ export default function page() {
         </PermissionContainer>
       </div>
     }>
-      <TableMenu />
+      <Suspense fallback={<div>Loading table...</div>}>
+        <TableMenu />
+      </Suspense>
     </PageContainer>
   )
 }

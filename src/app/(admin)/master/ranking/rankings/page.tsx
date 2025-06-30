@@ -3,6 +3,7 @@ import PermissionContainer from '@/components/permission-container'
 import { FormRanking } from './form'
 import TableRanking from './table'
 import PageContainer from '@/app/(admin)/_components/containers/page-container'
+import { Suspense } from 'react'
 
 export default function page() {
   return (
@@ -13,7 +14,9 @@ export default function page() {
         </PermissionContainer>
       </div>
     }>
-      <TableRanking />
+      <Suspense fallback={<div>Loading table...</div>}>
+        <TableRanking />
+      </Suspense>
     </PageContainer>
   )
 }

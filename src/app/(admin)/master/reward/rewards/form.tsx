@@ -245,7 +245,7 @@ export function FormReward(props?: { data?: TResponseReward }) {
                       field.onChange(value)
                       setLimited(value)
                     }}
-                      defaultValue={field.value}
+                      defaultValue={field.value !== undefined ? String(field.value) : undefined}
                     >
                       <FormControl>
                         <SelectTrigger>

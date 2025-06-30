@@ -23,7 +23,7 @@ export const columns: ColumnDef<TResponseReward>[] = [
         const stocks = row.original.stocks;
         return (
             <span className="text-right">
-            {stocks ? stocks.toLocaleString('id-ID') : '-'}
+            {stocks ? Number(stocks).toLocaleString('id-ID') : '-'}
             </span>
         )
     }
@@ -35,7 +35,7 @@ export const columns: ColumnDef<TResponseReward>[] = [
         const price = row.original.price;
         return (
             <span className="text-right">
-            {price ? price.toLocaleString('id-ID') : '-'}
+            {price ? Number(price).toLocaleString('id-ID') : '-'}
             </span>
         )
     }

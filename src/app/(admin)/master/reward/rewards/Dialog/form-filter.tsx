@@ -152,7 +152,7 @@ export function FormFilterReward(props?: { data?: TResponseReward }) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Top Likes</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} defaultValue={field.value !== undefined ? String(field.value) : undefined}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a choice" />
@@ -180,7 +180,7 @@ export function FormFilterReward(props?: { data?: TResponseReward }) {
                 render={({ field }) => (
                  <FormItem>
                     <FormLabel>Low Stock</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} defaultValue={field.value !== undefined ? String(field.value) : undefined}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a choice" />
@@ -208,7 +208,7 @@ export function FormFilterReward(props?: { data?: TResponseReward }) {
                 render={({ field }) => (
                  <FormItem>
                     <FormLabel>Limited</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} defaultValue={field.value !== undefined ? String(field.value) : undefined}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a choice" />

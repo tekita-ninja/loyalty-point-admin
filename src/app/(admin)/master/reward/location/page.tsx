@@ -3,6 +3,7 @@ import PermissionContainer from '@/components/permission-container'
 import PageContainer from '@/app/(admin)/_components/containers/page-container'
 import { FormLocation } from './form'
 import TableLocation from './table'
+import { Suspense } from 'react'
 
 export default function page() {
   return (
@@ -13,7 +14,9 @@ export default function page() {
         </PermissionContainer>
       </div>
     }>
-      <TableLocation />
+      <Suspense fallback={<div>Loading table...</div>}>
+        <TableLocation />
+      </Suspense>
     </PageContainer>
   )
 }
