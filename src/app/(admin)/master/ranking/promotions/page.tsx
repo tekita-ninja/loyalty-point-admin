@@ -3,6 +3,7 @@ import PermissionContainer from '@/components/permission-container'
 import { FormPromotions } from './form'
 import TablePromotions from './table'
 import PageContainer from '@/app/(admin)/_components/containers/page-container'
+import { Suspense } from 'react'
 
 export default function page() {
   return (
@@ -13,7 +14,9 @@ export default function page() {
         </PermissionContainer>
       </div>
     }>
-      <TablePromotions />
+      <Suspense fallback={<div>Loading table...</div>}>
+        <TablePromotions />
+      </Suspense>
     </PageContainer>
   )
 }

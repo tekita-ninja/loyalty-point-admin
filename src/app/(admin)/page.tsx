@@ -1,10 +1,12 @@
-import PageContainer from "./_components/containers/page-container";
 import DashboardOverview from "./dashboard/dashboard-overview";
+
+import PageContainer from "./_components/containers/page-container";
 
 export default function Home() {
   return (
       <PageContainer title="DASHBOARD">
-        <DashboardOverview />
-      </PageContainer>
+         <DashboardOverview />
+         <div>test</div>
+       </PageContainer>
   )
 }

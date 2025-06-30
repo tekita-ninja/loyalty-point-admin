@@ -4,6 +4,7 @@ import PermissionContainer from '@/components/permission-container'
 import PageContainer from '@/app/(admin)/_components/containers/page-container'
 import TableTransaction from './table'
 import ButtonForm from './button-form'
+import { Suspense } from 'react'
 
 export default function page() {
   return (
@@ -14,8 +15,9 @@ export default function page() {
         </PermissionContainer>
       </div>
     }>
-      
-      <TableTransaction />
+      <Suspense fallback={<div>Loading table...</div>}>
+        <TableTransaction />
+      </Suspense>
     </PageContainer>
   )
 }

@@ -9,17 +9,7 @@ export const formTransactionSchema = z.object({
   userId: z.string().min(1, { message: 'Customer is required' }),
   locationId: z.string().min(1, { message: 'Location is required' }),
   rewardId: z.string().min(1, { message: 'Reward is required' }),
-  qty: z.preprocess(
-    (val) => {
-      // Ubah string menjadi number jika perlu
-      if (typeof val === 'string' || typeof val === 'number') {
-        const num = Number(val);
-        return isNaN(num) ? undefined : num;
-      }
-      return undefined;
-    },
-    z.number().min(1, { message: 'Quantity must be a positive number' })
-  ),
+  qty: z.number().min(1, { message: 'Quantity must be a positive number' }),
   note: z.string().min(1, { message: 'Note is required' }),
 })
 

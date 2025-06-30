@@ -5,6 +5,7 @@ import PageContainer from '@/app/(admin)/_components/containers/page-container'
 import TablePoint from './table'
 import ButtonForm from './button-form'
 import ButtonFormCustomPoint from './button-custom-form'
+import { Suspense } from 'react'
 
 export default function page() {
 
@@ -12,15 +13,16 @@ export default function page() {
     <PageContainer title='Customer Point' subtitle='List Of Customer Point' actions={
       <div className='flex gap-2'>
         <PermissionContainer permission='POST_point/custom'>
-            <ButtonFormCustomPoint />
-        </PermissionContainer>  
+          <ButtonFormCustomPoint />
+        </PermissionContainer>
         <PermissionContainer permission='POST_point/add'>
-            <ButtonForm />
+          <ButtonForm />
         </PermissionContainer>
       </div>
     }>
-      
-      <TablePoint />
+      <Suspense fallback={<div>Loading table...</div>}>
+        <TablePoint />
+      </Suspense>
     </PageContainer>
   )
 }

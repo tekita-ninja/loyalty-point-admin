@@ -56,6 +56,7 @@ export type TResponseCustomerPoint = {
         cutPoint: number,
         note: string,
         reward: TResponseReward,
+        qty: string,
         location: TResponseLocation 
     },
     createdByUser: TResponseUser

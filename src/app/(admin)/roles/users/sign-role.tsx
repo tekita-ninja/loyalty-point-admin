@@ -90,7 +90,7 @@ export function SignRole(props: { data: TResponseUser }) {
                 name="roleIds"
                 render={() => (
                   <FormItem>
-                    <FormLabel>Roles Menu {props.data.fullname}</FormLabel>
+                    <FormLabel>Roles Menu {props.data.firstname} {props.data.lastname}</FormLabel>
                     <FormControl>
                       <ReactSelect
                         value={roles}

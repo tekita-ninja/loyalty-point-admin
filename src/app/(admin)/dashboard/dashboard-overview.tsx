@@ -1,4 +1,5 @@
 'use client'
+
 import { useDashboard } from "@/hooks/dashboard/useDashboard";
 import { CustomerCards, UserCards } from "./cards-dashobard";
 import RewardChart from "./reward-chart";
