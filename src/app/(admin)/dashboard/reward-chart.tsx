@@ -1,6 +1,8 @@
 'use client';
 import { TResponseDashboardOverview } from "@/schema/dashboard";
-import Chart from "react-apexcharts";
+import dynamic from "next/dynamic";
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+
 
 export default function RewardChart({ data }: { data: TResponseDashboardOverview }) {
     console.log('RewardChart data', data);
@@ -24,6 +26,5 @@ export default function RewardChart({ data }: { data: TResponseDashboardOverview
 
     return (
         <Chart options={options} series={series} type="bar" height={350} />
-        <div>test</div>
     )
 }
