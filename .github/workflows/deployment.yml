@@ -18,7 +18,7 @@ jobs:
 
       - name: copy env
         run: |
-          echo "VITE_BASE_URL=https://api.loyalty-point.stagingtekita.it.com/" >> .env
+          echo "NEXT_PUBLIC_BASE_URL=https://api.loyalty-point.stagingtekita.it.com/" >> .env
       
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
