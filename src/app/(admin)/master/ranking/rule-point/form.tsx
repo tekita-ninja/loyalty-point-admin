@@ -137,7 +137,7 @@ export function FormRulePoint(props?: { data?: TResponseRulePoint }) {
                     render={({ field }) => (
                     <FormItem>
                         <FormLabel>Active</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select onValueChange={field.onChange} defaultValue={field.value !== undefined ? String(field.value) : undefined}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Select Active" />
                             </SelectTrigger>

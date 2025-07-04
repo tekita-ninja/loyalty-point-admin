@@ -44,7 +44,7 @@ export function FormTransaction() {
             userId: '',
             locationId: '',
             rewardId: '',
-            qty: '',
+            qty: 1,
             note: '',
         }
     })
@@ -52,7 +52,7 @@ export function FormTransaction() {
     function onSubmit(values: TFormTransaction) {
           create.mutate({
             ...values,
-            qty: parseInt(values.qty),
+            qty: values.qty,
           }, {
             onSuccess: () => {
                 form.reset();

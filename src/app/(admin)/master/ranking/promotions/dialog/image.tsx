@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -32,7 +33,7 @@ export function DialogImageButton({ urlPicture, title } : { urlPicture: string, 
                         width={800}
                         height={800}
                         className="object-cover rounded"
-                        onClick={() => window.open(urlPicture, '_blank')}
+                        // onClick={() => window.open(urlPicture, '_blank')}
                     />
                 </TooltipTrigger>
                 <TooltipContent>

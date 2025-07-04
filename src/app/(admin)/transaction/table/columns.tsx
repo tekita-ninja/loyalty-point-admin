@@ -40,7 +40,7 @@ export const columns: ColumnDef<TResponseTransaction>[] = [
                 <div className="w-36 flex flex-col">
                     <span className="font-semibold">Name: {reward.name}</span>
                     <span className="text-sm text-gray-500">Category: {reward.category.name}</span>
-                    <span className="text-sm text-gray-500">Cut Point: {reward.price.toLocaleString('id-ID')}</span>
+                    <span className="text-sm text-gray-500">Cut Point: {Number(reward.price).toLocaleString('id-ID')}</span>
                 </div>
             )
         }
