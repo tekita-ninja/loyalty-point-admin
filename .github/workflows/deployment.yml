@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - staging
-      - feat/workflows
+      - feat/workflow
 
 jobs:
   deploy:
