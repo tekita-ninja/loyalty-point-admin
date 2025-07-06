@@ -26,6 +26,24 @@ const getList = async (params?: TQueryParam) => {
   return data;
 }
 
+const getOptionsRulePoint = async (customerId?: string, params?: TQueryParam) => {
+  const response = await axiosInstance({
+    method: 'GET',
+    url: `rule-point/options/${customerId}`,
+    params: {
+      ...params,
+      date:  new Date().toISOString()
+    }
+  })
+  const data = response.data.data.map((item: any) => {
+    return {
+      value: item.id,
+      label: item.name,
+    }
+  })
+  return data;
+}
+
 const getAllList = async () => {
   const response = await axiosInstance({
     method: 'GET',
@@ -84,7 +102,7 @@ const deleteData = async (id: string) => {
   return response.data;
 };
 
-export const useRulePoint = (optionsParams?: TQueryParam) => {
+export const useRulePoint = (optionsParams?: TQueryParam, customerId?: string, optionsConfig?: { enabled?: boolean }) => {
   const searchString = useSearchParams();
   const query = toObjectQuery(searchString)
   const queryClient = useQueryClient();
@@ -92,7 +110,8 @@ export const useRulePoint = (optionsParams?: TQueryParam) => {
 
   const options = useQuery({
     queryKey: ["rule-point_options", optionsParams],
-    queryFn: () => getList(optionsParams),
+    queryFn: () => getOptionsRulePoint(customerId, optionsParams),
+    enabled: optionsConfig?.enabled ?? !!customerId,
   });
 
   const allOptions = useQuery({
@@ -130,11 +149,13 @@ export const useRulePoint = (optionsParams?: TQueryParam) => {
       data: options.data,
       isLoading: options.isLoading,
       error: options.error,
+      refetch: options.refetch,
     },
     rulePointOptions: {
       data: options.data,
       isLoading: options.isLoading,
       error: options.error,
+      refetch: options.refetch,
     },
     ruleAllPointOptions: {
       data: allOptions.data,

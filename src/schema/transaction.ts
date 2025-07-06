@@ -9,7 +9,12 @@ export const formTransactionSchema = z.object({
   userId: z.string().min(1, { message: 'Customer is required' }),
   locationId: z.string().min(1, { message: 'Location is required' }),
   rewardId: z.string().min(1, { message: 'Reward is required' }),
-  qty: z.number().min(1, { message: 'Quantity must be a positive number' }),
+  qty: z.union([z.string(), z.number()]).refine(val => {
+        const num = typeof val === 'string' ? parseFloat(val) : val;
+        return !isNaN(num) && num >= 0;
+    }, {
+        message: 'Quantity must be greater than or equal to 0',
+    }),
   note: z.string().min(1, { message: 'Note is required' }),
 })
 

@@ -23,14 +23,20 @@ import { useState } from "react"
 import { RiAddLine, RiPencilLine } from "react-icons/ri"
 import { formBenefitSchema, TFormBenefit, TResponseBenefit } from "@/schema/master/benefit"
 import { useBenefit } from "@/hooks/master/useBenefit"
+import { useFile } from "@/hooks/files/useFile"
+import { Label } from "@/components/ui/label"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export function FormBenefit(props?: { data?: TResponseBenefit }) {
   const [dialog, setDialog] = useState(false)
   const { create, update } = useBenefit()
+  const { upload } = useFile()
+  
 
   const form = useForm<TFormBenefit>({
     resolver: zodResolver(formBenefitSchema),
     defaultValues: {
+      urlPicture: props?.data?.urlPicture ?? '',
       title: '',
       description: '',
     }
@@ -57,8 +63,23 @@ export function FormBenefit(props?: { data?: TResponseBenefit }) {
       form.reset({
         title: props.data.title ?? '',
         description: props.data.description ?? '',
+        urlPicture: props.data.urlPicture ?? '',
       })
     }
+  }
+
+   async function handleUploadFile(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    upload.mutate(
+      { file, folder: 'rewards' },
+      {
+        onSuccess: (url) => {
+          form.setValue("urlPicture", url);
+        },
+      }
+    );
   }
 
   return (
@@ -84,6 +105,38 @@ export function FormBenefit(props?: { data?: TResponseBenefit }) {
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+              <div className="grid gap-2">
+                <Label htmlFor="picture">Picture</Label>
+                {
+                  form.watch("urlPicture") && (
+                    <div className="flex items-center gap-2 cursor-pointer">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <img
+                              src={form.watch("urlPicture")}
+                              alt="Promotion Picture"
+                              className="max-h-24 object-cover rounded cursor-pointer"
+                              onClick={() => window.open(form.watch('urlPicture'), '_blank')}
+                            />
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Open image</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
+                  )
+                }
+                <div className="grid w-full max-w-sm items-center gap-3">
+                  <Input
+                    id="picture"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleUploadFile}
+                  />
+                </div>
+              </div>
               <FormField
                 control={form.control}
                 name="title"

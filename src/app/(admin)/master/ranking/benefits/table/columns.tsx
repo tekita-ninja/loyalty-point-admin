@@ -4,6 +4,7 @@ import PermissionContainer from "@/components/permission-container";
 import { TResponseBenefit } from "@/schema/master/benefit";
 import { FormBenefit } from "../form";
 import FormDelete from "../form-delete";
+import { DialogImageButton } from "../dialog/image";
 
 export const columns: ColumnDef<TResponseBenefit>[] = [
   {
@@ -14,6 +15,20 @@ export const columns: ColumnDef<TResponseBenefit>[] = [
     accessorKey: 'description',
     header: 'Description',
   },
+  {
+        accessorKey: 'urlPicture',
+        header: 'Image Icon',
+        cell: ({ row }) => {
+            return (
+                <div>
+                    <DialogImageButton
+                        urlPicture={row.original.urlPicture}
+                        name={row.original.title}
+                    />
+                </div>
+            )
+        }
+      },
   {
     id: "actions",
     enableHiding: false,

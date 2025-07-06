@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { formAddCustomerPointSchema, TFormAddCustomerPoint } from "@/schema/customer-poin";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -23,6 +23,7 @@ import { useDebounceCallback } from "usehooks-ts"
 import { useRulePoint } from "@/hooks/master/useRulePoint"
 import { useCustomerPoints } from "@/hooks/customer/useCustomerPoints"
 import { useRouter } from "next/navigation"
+import { rule } from "postcss"
 
 export function FormAddPoint() {
     const { add } = useCustomerPoints()
@@ -30,8 +31,8 @@ export function FormAddPoint() {
     const [openRulePoint, setOpenRulePoint] = useState(false)
     const [searchOptions, setSearchOptions] = useState<string>("")
     const [searchOptionsRulePoint, setSearchOptionsRulePoint] = useState<string>("")
-    const { customerOptions } = useCustomer({search: searchOptions})
-    const { rulePointOptions } = useRulePoint({ search: searchOptionsRulePoint })
+    const { customerOptions, getDetail } = useCustomer({search: searchOptions})
+
     const router = useRouter()
 
     const form = useForm<TFormAddCustomerPoint>({
@@ -44,6 +45,29 @@ export function FormAddPoint() {
         }
     })
 
+
+    const userId = form.watch('userId');
+    const { rulePointOptions } = useRulePoint({ search: searchOptionsRulePoint }, userId, {enabled: false})
+
+    const fetchCustomerDetail = async () => {
+    if (userId) {
+      try {
+        const data = await getDetail(userId);
+        const rulePointId = data?.ranking?.rulePoint?.id;
+        if (rulePointId) {
+          form.setValue('rulePointId', rulePointId);
+        }
+      } catch (error) {
+        console.error("Failed to fetch customer detail:", error);
+      }
+    }
+  };
+
+    useEffect(() => {
+        fetchCustomerDetail();
+    }, [userId]);
+
+
     function onSubmit(values: TFormAddCustomerPoint) {
           add.mutate({
             ...values,
@@ -52,8 +76,9 @@ export function FormAddPoint() {
         form.reset();
         router.push('/customer/points')
     }
-    function handleClickCustomerSelect() {
+    async function handleClickCustomerSelect() {
         setOpenCustomer(false);
+        rulePointOptions.refetch();
     }
 
     const onChangeSearch = useDebounceCallback((value: string) => {
@@ -142,7 +167,7 @@ export function FormAddPoint() {
                                             className="w-full justify-between"
                                         >
                                             {field.value
-                                                ? rulePointOptions.data?.find((rulePoint: any) => rulePoint.value === field.value)?.label
+                                                ? rulePointOptions?.data?.find((rulePoint: any) => rulePoint.value === field.value)?.label
                                                 : "Select Rule Point..."}
                                             <ChevronsUpDown className="opacity-50" />
                                         </Button>

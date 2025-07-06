@@ -76,4 +76,5 @@ export type TResponseCustomer = {
     point: number;
   };
   totalPoint: number;
+  totalSpendings: number;
 };

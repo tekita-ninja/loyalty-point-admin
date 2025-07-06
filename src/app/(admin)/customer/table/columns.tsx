@@ -39,6 +39,17 @@ export const columns: ColumnDef<TResponseCustomer>[] = [
       )
     }
   },
+  {
+    accessorKey: 'totalSpendings',
+    header: 'Total Spending',
+    cell: ({ row }) => {
+      return (
+        <div>
+          Rp. {row.original.totalSpendings.toLocaleString('id-ID')}
+        </div>
+      )
+    }
+  },
   // {
   //   id: "actions",
   //   enableHiding: false,
