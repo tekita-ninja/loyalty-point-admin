@@ -52,7 +52,7 @@ export function FormTransaction() {
     function onSubmit(values: TFormTransaction) {
           create.mutate({
             ...values,
-            qty: values.qty,
+            qty: Number(values.qty),
           }, {
             onSuccess: () => {
                 form.reset();

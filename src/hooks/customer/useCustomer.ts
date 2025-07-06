@@ -33,7 +33,7 @@ const getDetail = async (id: string) => {
     method: 'GET',
     url: `customer/${id}`
   })
-  return response.data;
+  return response.data.data;
 }
 
 export const useCustomer = (optionsParams? : TQueryParam) => {
